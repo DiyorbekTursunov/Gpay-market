@@ -2,6 +2,7 @@
 
 .order-page {
     &__container {
+        background-color: #161616;
         width: 100%;
         margin: auto;
         display: flex;
@@ -11,7 +12,7 @@
         height: 100vh;
         position: relative;
 
-        background-image: url('../../assets/bacrounds/bacrounds_mon.svg');
+        background-image: url('../../assets/background/background_mon.jpg');
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -70,7 +71,7 @@
     }
 
     &__background {
-        background-image: url('../../assets/bacrounds/bacround_mon_res.svg');
+        background-image: url('../../assets/background/background_mon_res.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         top: 0;

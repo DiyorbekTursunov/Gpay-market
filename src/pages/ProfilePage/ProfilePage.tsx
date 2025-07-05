@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileLeft from "../../components/ProfileLeft/ProfileLeft";
 import ProfileRight from "../../components/ProfileRight/ProfileRight";
-import AtomicPng from "../../assets/bacrounds/atomic.png";
+import AtomicPng from "../../assets/background/atomic.png";
 import logo from "../../assets/logo/logos.svg"
 import "./ProfilePage.scss";
 
