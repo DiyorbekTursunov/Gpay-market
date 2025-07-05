@@ -1,45 +1,35 @@
-// pages/OrderPage/OrderPage.tsx
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import OrderForm from '../../components/OrderForm/OrderForm';
 import LanguageSelector from '../../components/LanguageSelector/LanguageSelector';
 import TelegramLink from '../../components/TelegramLink/TelegramLink';
-import { OrderFormData, LanguageOption } from '../../types';
+
+import { OrderFormData } from '../../types';
 import './OrderPage.scss';
 
 const OrderPage: React.FC = () => {
-  const [activeLanguage, setActiveLanguage] = useState<'RU' | 'EN'>('RU');
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string>('');
-
-  const languages: LanguageOption[] = [
-    { code: 'RU', label: 'Русский' },
-    { code: 'EN', label: 'English' },
-  ];
+  const [error, setError] = useState('');
 
   const handleFormSubmit = async (data: OrderFormData) => {
     setIsLoading(true);
     setError('');
-
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((r) => setTimeout(r, 2000));
       console.log('Form submitted:', data);
-      // Here you would make actual API call
-    } catch (err) {
-      setError('Произошла ошибка при отправке формы');
+    } catch {
+      setError(t('orderForm.robotError'));
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleLanguageChange = (language: 'RU' | 'EN') => {
-    setActiveLanguage(language);
-  };
-
   return (
     <section className="order-page">
       <div className="order-page__container">
-        <div className="order-page__background"></div>
+        <div className="order-page__background" />
 
         <div className="order-page__logo">
           <img src="/img/logo/logos.svg" alt="game logo" />
@@ -52,19 +42,17 @@ const OrderPage: React.FC = () => {
             error={error}
           />
 
-          <h3 className="order-page__contact-title">Связаться с продавцом</h3>
+          <h3 className="order-page__contact-title">
+            {t('contactTitle')}
+          </h3>
 
           <div className="order-page__bottom">
-            <LanguageSelector
-              languages={languages}
-              activeLanguage={activeLanguage}
-              onLanguageChange={handleLanguageChange}
-            />
+            <LanguageSelector />
 
             <TelegramLink
               url="/"
-              text="У нас раздачи игр! Подпишись"
-              title="У нас раздачи игр! Подпишись"
+              text={t('telegramText')}
+              title={t('telegramText')}
             />
           </div>
         </div>
@@ -78,20 +66,16 @@ const OrderPage: React.FC = () => {
         />
 
         <a className="order-page__contact-link" href="#">
-          <h3>Связаться с продавцом</h3>
+          <h3>{t('contactTitle')}</h3>
         </a>
 
         <div className="order-page__bottom">
-          <LanguageSelector
-            languages={languages}
-            activeLanguage={activeLanguage}
-            onLanguageChange={handleLanguageChange}
-          />
+          <LanguageSelector />
 
           <TelegramLink
             url="/"
-            text="У нас раздачи игр! Подпишись"
-            title="У нас раздачи игр! Подпишись"
+            text={t('telegramText')}
+            title={t('telegramText')}
           />
         </div>
       </div>

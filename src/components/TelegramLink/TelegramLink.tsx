@@ -1,25 +1,16 @@
-import React from 'react';
-import { useLanguage } from '../../hooks/useLanguage.ts';
-import './TelegramLink.scss';
+import React from "react";
+import { TelegramLinkProps } from "../../types";
+import "./TelegramLink.scss";
 
-interface TelegramLinkProps {
-  url: string;
-}
-
-const TelegramLink: React.FC<TelegramLinkProps> = ({ url }) => {
-  const { t } = useLanguage();
-
-  return (
-    <a
-      className="telegram-link"
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      title={t('telegram.text')}
-    >
-      {t('telegram.text')}
+const TelegramLink: React.FC<TelegramLinkProps> = ({ url, text, title }) => (
+  <div className="telegram-link">
+    <div className="telegram-link__back-ground">
+      <div className="telegram-link__text">{text}</div>
+    </div>
+    <a href={url} title={title} className="telegram-link__icon">
+      <img src="/img/icons/telegram.svg" alt="telegram logo" />
     </a>
-  );
-};
+  </div>
+);
 
 export default TelegramLink;

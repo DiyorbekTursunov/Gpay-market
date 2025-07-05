@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Button, Input } from '../UI';
 import { OrderFormProps, OrderFormData } from '../../types';
 import './OrderForm.scss';
 
 const OrderForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<OrderFormData>({
     code: '',
     isNotRobot: false,
@@ -29,27 +32,36 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error }) => 
 
   return (
     <form className="order-form" onSubmit={handleSubmit}>
-      <h2 className="order-form__title">Введите уникальный код заказа</h2>
-
-      <input
-        className="order-form__input"
-        type="text"
-        placeholder="Введите уникальный код"
-        value={formData.code}
-        onChange={handleCodeChange}
+      <h2
+        className="order-form__title"
+        dangerouslySetInnerHTML={{ __html: t('orderForm.title') }}
       />
 
-      <button
-        type="submit"
-        className="order-form__button"
-        disabled={isLoading}
-      >
-        {isLoading ? 'Загрузка...' : 'Подтвердить'}
-      </button>
+      <Input
+        value={formData.code}
+        onChange={handleCodeChange}
+        placeholder={t('orderForm.placeholder')}
+        fullWidth
+        size="medium"
+        required
+        name="code"
+        id="order-code"
+        autoComplete="off"
+      />
 
-      <div className="order-formcheckbox">
+      <Button
+        text={t('orderForm.submitButton')}
+        type="submit"
+        isLoading={isLoading}
+        disabled={isLoading}
+        fullWidth
+        variant="primary"
+        size="medium"
+      />
+
+      <div className="order-form__checkbox">
         <input
-          className="order-formcheckbox-input"
+          className="order-form__checkbox-input"
           id="not-robot"
           type="checkbox"
           checked={formData.isNotRobot}
@@ -57,7 +69,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error }) => 
         />
         <span className="checkmark"></span>
         <label className="order-form__checkbox-label" htmlFor="not-robot">
-          Я не робот
+          {t('orderForm.notRobotLabel')}
         </label>
       </div>
 

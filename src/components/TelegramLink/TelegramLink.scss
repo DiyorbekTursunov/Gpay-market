@@ -2,29 +2,65 @@
 
 @use '../../styles/variables' as *;
 
+
 .telegram-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    position: relative;
+    ;
 
-  &__text {
-    @include font-base;
-    font-size: 14px;
-    line-height: 130%;
-    padding: 6.5px 11px 6.5px 12px;
-    color: var(--color-primary);
-    background-color: var(--bg-telegram);
-    border: 1px solid var(--color-telegram-border);
-    border-radius: 4px;
-    max-width: 144px;
-    text-align: start;
 
-    @include mobile {
-      display: none;
+    &__back-ground {
+        right: 0;
+        position: absolute;
+        top: -65px;
+        background-image: url(../../../public/img/bacrounds/telegram-link-bg.png);
+        background-repeat: no-repeat;
+        z-index: 10;
+
+
+        width: 144px;
+        height: 62px;
+
+        @include mobile {
+            display: none
+        }
     }
-  }
 
-  &__icon {
-    padding: 8px 10px 8px 8px;
-  }
+    &__text {
+        @include font-base;
+        padding: 6.5px 12px;
+
+        font-size: 14px;
+        line-height: 130%;
+        // padding: 6.5px 11px 6.5px 12px;
+        color: var(--color-primary);
+
+        border-radius: 4px;
+        max-width: 144px;
+        text-align: start;
+
+        @include mobile {
+            display: none;
+        }
+    }
+
+    &__icon {
+        padding: 8px 10px 8px 8px;
+    }
+}
+
+
+.telegram-link {
+    position: relative;
+
+    &__back-ground {
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+    }
+
+    &__icon:hover~.telegram-link__back-ground,
+    &:hover .telegram-link__back-ground {
+        opacity: 1;
+        pointer-events: auto;
+    }
 }

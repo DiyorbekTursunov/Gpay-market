@@ -1,6 +1,4 @@
-// components/LanguageSelector/LanguageSelector.scss
 @use '../../styles/variables.scss' as *;
-
 
 .language-selector {
   display: flex;
@@ -16,8 +14,19 @@
     line-height: 100%;
     cursor: pointer;
     transition: var(--transition-default);
+    outline: none;
+
+    &:focus {
+      background-color: var(--bg-secondary);
+      color: var(--color-accent-light);
+    }
 
     &.active {
+      background-color: var(--bg-secondary);
+      color: var(--color-accent-light);
+    }
+
+    &:hover {
       background-color: var(--bg-secondary);
       color: var(--color-accent-light);
     }

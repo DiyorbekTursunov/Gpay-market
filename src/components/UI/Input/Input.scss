@@ -1,0 +1,133 @@
+// components/UI/Input/Input.scss
+
+@use '../../../styles/variables' as *;
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.input-label {
+  @include font-base;
+  font-size: 16px;
+  line-height: 120%;
+  color: var(--color-secondary);
+  font-weight: 500;
+
+  @include mobile {
+    font-size: 14px;
+  }
+
+  &__required {
+    color: #ff4444;
+    margin-left: 4px;
+  }
+}
+
+.input {
+  @include font-base;
+  text-align: center;
+  border-radius: 4px;
+  border: 2px solid var(--color-border);
+  background-color: var(--bg-primary);
+  color: var(--color-primary);
+  outline: none;
+  transition: all var(--transition-default);
+  @include flex-center;
+
+  &::placeholder {
+    color: var(--color-secondary);
+    opacity: 0.7;
+  }
+
+  // Base size - medium
+  &--medium {
+    font-size: 20px;
+    line-height: 100%;
+    padding: 12px 16px;
+
+    @include mobile {
+      font-size: 14px;
+      padding: 10px 12px;
+    }
+  }
+
+  // Small size
+  &--small {
+    font-size: 16px;
+    line-height: 100%;
+    padding: 8px 12px;
+
+    @include mobile {
+      font-size: 12px;
+      padding: 6px 8px;
+    }
+  }
+
+  // Large size
+  &--large {
+    font-size: 24px;
+    line-height: 100%;
+    padding: 16px 20px;
+
+    @include mobile {
+      font-size: 18px;
+      padding: 14px 16px;
+    }
+  }
+
+  // Full width
+  &--full-width {
+    width: 100%;
+  }
+
+  // Focused state
+  &--focused {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.1);
+  }
+
+  // Error state
+  &--error {
+    border-color: #ff4444;
+
+    &:focus {
+      border-color: #ff4444;
+      box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.1);
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--bg-secondary, #f5f5f5);
+  }
+
+  // Hover state
+  &:hover:not(.input--disabled):not(.input--error) {
+    border-color: var(--color-accent);
+  }
+
+  // Focus state
+  &:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.1);
+  }
+}
+
+.input-error {
+  @include font-base;
+  font-size: 14px;
+  line-height: 120%;
+  color: #ff4444;
+  margin-top: 4px;
+  text-align: left;
+
+  @include mobile {
+    font-size: 12px;
+  }
+}

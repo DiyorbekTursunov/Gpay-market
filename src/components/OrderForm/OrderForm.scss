@@ -3,120 +3,87 @@
 @use '../../styles/variables' as *;
 
 .order-form {
-  max-width: 400px;
-  margin: auto;
+    max-width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    //   gap: 15px;
 
-  &__title {
-    @include font-base;
-    font-size: 25px;
-    line-height: 130%;
-    color: var(--color-primary);
-    margin-bottom: 20px;
-    text-align: center;
+    &__title {
+        @include font-base;
+        font-size: 25px;
+        line-height: 130%;
+        color: var(--color-primary);
+        margin-bottom: 20px;
+        text-align: center;
 
-    @include mobile { font-size: 20px; }
-  }
-
-  &__input {
-    @include font-base;
-    font-size: 20px;
-    line-height: 100%;
-    text-align: center;
-    border-radius: 4px;
-    padding: 12px 0;
-    @include flex-center;
-    width: 100%;
-    border: 2px solid var(--color-border);
-    background-color: var(--bg-primary);
-    margin-bottom: 15px;
-    color: var(--color-secondary);
-    outline: none;
-
-    @include mobile { font-size: 14px; }
-  }
-
-  &__button {
-    @include font-base;
-    font-size: 20px;
-    margin-bottom: 20px;
-    line-height: 100%;
-    cursor: pointer;
-    text-align: center;
-    padding: 12px 0;
-    border: none;
-    @include flex-center;
-    border-radius: 4px;
-    background-color: var(--color-accent);
-    color: var(--color-primary);
-    width: 100%;
-
-    &:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
+        @include mobile {
+            font-size: 20px;
+        }
     }
 
-    @include mobile { font-size: 14px; }
-  }
+    &__checkbox {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+        margin-bottom: 25px;
+    }
 
-  &__checkbox {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 25px;
-    gap: 10px;
-    cursor: pointer;
-  }
+    &__checkbox-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        opacity: 0;
+        margin: 0;
+        z-index: 2;
+        cursor: pointer;
+    }
 
-  &__checkbox-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 25px;
-    height: 25px;
-    opacity: 0;
-    margin: 0;
-    z-index: 2;
-    cursor: pointer;
-  }
+    &__checkbox-label {
+        @include font-base;
+        color: var(--color-secondary);
+        font-size: 20px;
+        line-height: 100%;
+        text-align: center;
+        cursor: pointer;
 
-  &__checkbox-label {
-    @include font-base;
-    color: var(--color-secondary);
-    font-size: 20px;
-    line-height: 100%;
-    text-align: center;
-    cursor: pointer;
+        @include mobile {
+            font-size: 14px;
+        }
+    }
 
-    @include mobile { font-size: 14px; }
-  }
-
-  &__error {
-    color: #ff4444;
-    @include font-base;
-    font-size: 14px;
-    text-align: center;
-    margin-top: 10px;
-  }
+    &__error {
+        color: #ff4444;
+        @include font-base;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 5px;
+    }
 }
 
 .checkmark {
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  background-color: var(--bg-primary);
-  border: 2px solid var(--color-primary);
-  border-radius: 4px;
-  transition: background-color var(--transition-default);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 25px 25px;
-  pointer-events: none;
-  z-index: 1;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: var(--bg-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    transition: background-color var(--transition-default);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25px 25px;
+    pointer-events: none;
+    z-index: 1;
 }
 
-.order-form__checkbox-input:checked + .checkmark {
-  background-color: var(--color-accent);
-  border: none;
-  background-image: url('/img/icons/checkmark-image.svg');
+.order-form__checkbox-input:checked+.checkmark {
+    background-color: var(--color-accent);
+    border: none;
+    background-image: url('/img/icons/checkmark-image.svg');
 }

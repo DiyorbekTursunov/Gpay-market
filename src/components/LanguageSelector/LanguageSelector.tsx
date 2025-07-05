@@ -1,20 +1,14 @@
 import React from 'react';
-import { useLanguage } from '../../hooks/useLanguage.ts';
-import { LanguageCode } from '../../store/slices/languageSlice.ts';
-import './LanguageSelector.scss';
-
-interface LanguageOption {
-  code: LanguageCode;
-  label: string;
-}
+import { useLanguage } from '../../contexts/LanguageContext';
+import "./LanguageSelector.scss";
 
 const LanguageSelector: React.FC = () => {
-  const { currentLanguage, changeLanguage } = useLanguage();
+  const { currentLanguage, languages, changeLanguage } = useLanguage();
 
-  const languages: LanguageOption[] = [
-    { code: 'RU', label: 'Русский' },
-    { code: 'EN', label: 'English' },
-  ];
+  const handleLanguageChange = (languageCode: string) => {
+    console.log('Switching to language:', languageCode);
+    changeLanguage(languageCode);
+  };
 
   return (
     <div className="language-selector">
@@ -24,7 +18,14 @@ const LanguageSelector: React.FC = () => {
           className={`language-selector__item ${
             currentLanguage === language.code ? 'active' : ''
           }`}
-          onClick={() => changeLanguage(language.code)}
+          onClick={() => handleLanguageChange(language.code)}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleLanguageChange(language.code);
+            }
+          }}
         >
           {language.code}
         </div>
