@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+.profile-header {
+  display: flex;
+  align-items: start;
+  gap: 40px;
+  padding: 0 10px;
+  margin-bottom: 14px;
+
+  &__logo {
+    width: 35px;
+    height: 25px;
+  }
+
+  &__text {
+    @include font-base;
+    font-size: 14px;
+    line-height: 130%;
+    color: white;
+    max-width: 186px;
+  }
+}

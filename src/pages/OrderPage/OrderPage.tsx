@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import OrderForm from '../../components/OrderForm/OrderForm';
 import LanguageSelector from '../../components/LanguageSelector/LanguageSelector';
 import TelegramLink from '../../components/TelegramLink/TelegramLink';
+import logo from "../../assets/logo/logos.svg"
 
 import { OrderFormData } from '../../types';
 import './OrderPage.scss';
@@ -32,7 +33,7 @@ const OrderPage: React.FC = () => {
         <div className="order-page__background" />
 
         <div className="order-page__logo">
-          <img src="/img/logo/logos.svg" alt="game logo" />
+          <img src={logo} alt="game logo" />
         </div>
 
         <div className="order-page__content">

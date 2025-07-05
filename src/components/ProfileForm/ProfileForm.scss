@@ -5,6 +5,9 @@
     margin: auto;
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
+
+
     //   gap: 15px;
 
     &__title {
@@ -15,10 +18,12 @@
         margin-bottom: 20px;
         text-align: center;
 
+        @include mobile {
+            font-size: 20px;
+        }
     }
 
     &__checkbox {
-                @include font-base;
         position: relative;
         display: flex;
         align-items: center;
@@ -27,7 +32,6 @@
         cursor: pointer;
         margin-top: 20px;
         margin-bottom: 25px;
-        color: var(--color-secondary);
     }
 
     &__checkbox-input {
@@ -64,19 +68,6 @@
     }
 }
 
-.order-form__checkbox-input {
-    position: absolute;
-    top: 0;
-    left: 200px;
-    width: 25px;
-    height: 25px;
-    opacity: 0;
-    margin: 0;
-    /* lower its stacking or just remove this */
-    z-index: 1;
-}
-
-
 .checkmark {
     display: inline-block;
     width: 25px;
@@ -88,15 +79,12 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 25px 25px;
-    /* allow it to sit on top of the input */
-    position: relative;
-    z-index: 2;
     pointer-events: none;
+    z-index: 1;
 }
 
-.order-form__checkbox-input:checked ~ .checkmark {
-  background-color: var(--color-accent);
-  border-radius: 8px;
-  border: none;
+.order-form__checkbox-input:checked+.checkmark {
+    background-color: var(--color-accent);
+    border: none;
   background-image: url('../../assets/icons/checkmark-image.svg');
 }

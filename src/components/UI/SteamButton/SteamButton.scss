@@ -1,0 +1,58 @@
+@import '../../../styles/variables';
+
+.steam__btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--color-accent);
+    border-radius: 10px;
+    padding: 12px;
+    gap: 14px;
+    margin-bottom: 64px;
+    cursor: pointer;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s,
+        transform 0.1s;
+
+    &__text {
+        @include font-base;
+        font-size: 20px;
+        line-height: 100%;
+        text-align: center;
+        color: var(--color-primary);
+        transition: color 0.2s;
+    }
+
+    &:hover,
+    &:focus-visible {
+        opacity: .8px;
+    }
+
+    &:active {
+        background-color: var(--color-accent);
+        border-color: var(--color-primary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+        transform: translateY(0) scale(1);
+
+        .steam__btn__text {
+            color: var(--bg-secondary);
+        }
+    }
+}
+
+// Small mobile breakpoint
+@media (max-width: 520px) {
+    .steam__btn {
+        padding: 11px;
+        border-radius: 4px;
+
+        &__text {
+            font-size: 14px;
+            line-height: 17px;
+        }
+    }
+}

@@ -1,129 +1,144 @@
-// pages/OrderPage/OrderPage.scss
-
-@use '../../styles/variables' as *;
+@import '../../styles/variables';
 
 .order-page {
-  &__container {
-    width: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    position: relative;
-  }
+    &__container {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        position: relative;
 
-  &__logo {
-    position: absolute;
-    top: 15px;
+        background-image: url('../../assets/bacrounds/bacrounds_mon.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
 
-    @include mobile {
-      left: 17px;
-      z-index: 15;
-    }
-  }
+        @include mobile {
+            background-image: none;
+        }
 
-  &__content {
-    background-color: var(--bg-primary);
-    border-radius: 10px;
-    padding: 50px 30px 30px 30px;
-    text-align: center;
-    width: 380px;
-
-    @include mobile {
-      display: none;
-    }
-  }
-
-  &__contact-title {
-    @include font-base;
-    font-size: 20px;
-    line-height: 100%;
-    color: var(--color-primary);
-    margin-bottom: 26px;
-    text-decoration: none;
-    text-align: center;
-
-    @include mobile {
-      font-size: 14px;
-    }
-  }
-
-  &__bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    @include mobile {
-        padding-bottom: 20px;
-      margin-top: 35px;
-    }
-  }
-
-  &__background {
-    background-image: url('/img/bacrounds/bacround_mon_res.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-position: top;
-    display: none;
-    z-index: 10;
-    position: absolute;
-    background-size: 830px;
-    top: -200px;
-
-    @include mobile {
-      display: block;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      z-index: 5;
-    //   top: -280px;
     }
 
-    @include small-mobile {
-    background-size: 830px;
-    top: -200px;
-    }
-  }
+    &__logo {
+        position: absolute;
+        top: 15px;
 
-  &__mobile-content {
-    display: none;
-
-    @include mobile {
-      display: block;
-      width: 100%;
-    //   margin-top: -200px;
-      position: absolute;
-      z-index: 10;
-      background-color: var(--bg-primary);
-      padding: 0 20px;
-      bottom: 0;
-    }
-  }
-
-  &__contact-link {
-    @include font-base;
-    font-size: 20px;
-    line-height: 100%;
-    color: var(--color-primary);
-    margin-bottom: 26px;
-    text-decoration: none;
-    text-align: center;
-
-    @include mobile {
-      font-size: 14px;
+        @include mobile {
+            left: 17px;
+            z-index: 15;
+        }
     }
 
-    h3 {
-      @include font-base;
-      font-size: inherit;
-      line-height: inherit;
-      color: inherit;
-      margin: 0;
+    &__content {
+        background-color: var(--bg-primary);
+        border-radius: 10px;
+        padding: 50px 30px 30px 30px;
+        text-align: center;
+        width: 380px;
+
+        @include mobile {
+            display: none;
+        }
     }
-  }
+
+    &__contact-title {
+        @include font-base;
+        font-size: 20px;
+        line-height: 100%;
+        color: var(--color-primary);
+        margin-bottom: 26px;
+        text-decoration: none;
+        text-align: center;
+
+        @include mobile {
+            font-size: 14px;
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @include mobile {
+            padding-bottom: 20px;
+            margin-top: 35px;
+        }
+    }
+
+    &__background {
+        background-image: url('../../assets/bacrounds/bacround_mon_res.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-position: top;
+        display: none;
+        z-index: 10;
+        position: absolute;
+        background-size: 830px;
+        top: -200px;
+
+        @include mobile {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 5;
+            //   top: -280px;
+        }
+
+        @include small-mobile {
+            background-size: 830px;
+            top: -200px;
+        }
+    }
+
+    @media (max-width: 539px) {
+        &__background {
+            background-size: 540px;
+            top: 0px;
+        }
+    }
+
+    &__mobile-content {
+        display: none;
+
+        @include mobile {
+            display: block;
+            width: 100%;
+            //   margin-top: -200px;
+            position: absolute;
+            z-index: 10;
+            background-color: var(--bg-primary);
+            padding: 0 20px;
+            bottom: 0;
+        }
+    }
+
+    &__contact-link {
+        @include font-base;
+        font-size: 20px;
+        line-height: 100%;
+        color: var(--color-primary);
+        margin-bottom: 26px;
+        text-decoration: none;
+        text-align: center;
+
+        @include mobile {
+            font-size: 14px;
+        }
+
+        h3 {
+            @include font-base;
+            font-size: inherit;
+            line-height: inherit;
+            color: inherit;
+            margin: 0;
+        }
+    }
 }
