@@ -1,0 +1,25 @@
+// components/LanguageSelector/LanguageSelector.scss
+@use '../../styles/variables.scss' as *;
+
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &__item {
+    color: var(--color-primary);
+    padding: 7px 8px 6px 8px;
+    border-radius: 4px;
+    @include font-base;
+    font-size: 14px;
+    line-height: 100%;
+    cursor: pointer;
+    transition: var(--transition-default);
+
+    &.active {
+      background-color: var(--bg-secondary);
+      color: var(--color-accent-light);
+    }
+  }
+}

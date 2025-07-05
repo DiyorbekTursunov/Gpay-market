@@ -1,0 +1,30 @@
+// components/TelegramLink/TelegramLink.scss
+
+@use '../../styles/variables' as *;
+
+.telegram-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__text {
+    @include font-base;
+    font-size: 14px;
+    line-height: 130%;
+    padding: 6.5px 11px 6.5px 12px;
+    color: var(--color-primary);
+    background-color: var(--bg-telegram);
+    border: 1px solid var(--color-telegram-border);
+    border-radius: 4px;
+    max-width: 144px;
+    text-align: start;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &__icon {
+    padding: 8px 10px 8px 8px;
+  }
+}

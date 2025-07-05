@@ -1,0 +1,57 @@
+// styles/_variables.scss
+
+// 1) Compile-time breakpoints
+$breakpoint-mobile: 768px !default;
+$breakpoint-small: 320px !default;
+
+// 2) CSS custom-properties (for colors, fonts, etc.)
+:root {
+  // Colors
+  --bg-primary: #161616;
+  --bg-secondary: #2B1734;
+  --bg-telegram: #083982;
+  --color-primary: #FFFFFF;
+  --color-secondary: #838383;
+  --color-accent: #7921D1;
+  --color-accent-light: #C964FC;
+  --color-border: #454545;
+  --color-telegram-border: #248BEA;
+
+  // Fonts
+  --font-family: "SF Pro Display", sans-serif;
+  --font-weight-medium: 500;
+
+  // Breakpoints (mirrored for any JS/CSS-var use)
+  --breakpoint-mobile: #{$breakpoint-mobile};
+  --breakpoint-small:  #{$breakpoint-small};
+
+  // Transitions
+  --transition-default: 0.3s;
+}
+
+// 3) Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin font-base {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-style: normal;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin small-mobile {
+  @media (max-width: $breakpoint-small) {
+    @content;
+  }
+}

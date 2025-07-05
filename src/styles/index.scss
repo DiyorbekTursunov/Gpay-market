@@ -1,0 +1,27 @@
+// styles/index.scss
+
+@use './variables' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/sf-pro-display/SFPRODISPLAYREGULAR.OTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-image: url('/img/bacrounds/bacrounds_mon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  @include mobile {
+    background-image: none;
+  }
+}
