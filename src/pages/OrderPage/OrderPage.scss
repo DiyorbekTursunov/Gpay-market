@@ -106,6 +106,21 @@
         }
     }
 
+
+    @media (max-height: 825px) {
+        &__background {
+            background-size: 540px;
+            top: -100px;
+        }
+    }
+
+    @media (max-height: 700px) {
+        &__background {
+            background-size: 540px;
+            top: -200px;
+        }
+    }
+
     &__mobile-content {
         display: none;
 
