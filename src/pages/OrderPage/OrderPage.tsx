@@ -8,6 +8,7 @@ import logo from "../../assets/logo/logos.svg"
 
 import { OrderFormData } from '../../types';
 import './OrderPage.scss';
+import { Link } from 'react-router-dom';
 
 const OrderPage: React.FC = () => {
   const { t } = useTranslation();
@@ -43,9 +44,9 @@ const OrderPage: React.FC = () => {
             error={error}
           />
 
-          <h3 className="order-page__contact-title">
+          <Link to={"#"} className="order-page__contact-title">
             {t('contactTitle')}
-          </h3>
+          </Link>
 
           <div className="order-page__bottom">
             <LanguageSelector />
@@ -66,9 +67,9 @@ const OrderPage: React.FC = () => {
           error={error}
         />
 
-        <a className="order-page__contact-link" href="#">
+        <Link to={"#"} className="order-page__contact-link">
           <h3>{t('contactTitle')}</h3>
-        </a>
+        </Link>
 
         <div className="order-page__bottom">
           <LanguageSelector />

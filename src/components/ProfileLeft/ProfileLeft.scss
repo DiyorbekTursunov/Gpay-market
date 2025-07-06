@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@use '../../styles/variables' as *;
 
 .profile__left {
     max-width: 1106px;
@@ -83,7 +83,8 @@
 
         &__img {
             margin-bottom: 0;
-            height: 159px;
+            width: 100%;
+            height: 100%;
             border-radius: 4px;
         }
 
@@ -97,7 +98,7 @@
 
         &__row {
             position: absolute;
-            top: 122px;
+            bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
             //   flex-wrap: nowrap;
