@@ -54,6 +54,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
       <Button
         text={t("orderForm.submitButton")}
         type="submit"
+
         isLoading={isLoading}
         disabled={isLoading}
         fullWidth

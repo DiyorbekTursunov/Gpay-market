@@ -10,6 +10,7 @@
   border-radius: 4px;
   outline: none;
   transition: all var(--transition-default);
+  margin-bottom: 5px;
   @include flex-center;
 
   // Base size - medium
@@ -66,8 +67,8 @@
   // Secondary variant
   &--secondary {
     background-color: transparent;
-    color: var(--color-secondary);
-    border: 2px solid var(--color-border);
+    color: var(--color-primary);
+    border: 2px solid #7921D1;
 
     &:hover:not(.button--disabled) {
       background-color: var(--color-border);

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Input } from '../UI';
 import { OrderFormProps, OrderFormData } from '../../types';
-import './ProfileForm.scss';
+import './SecondProfileForm.scss';
 
-const ProfileForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error }) => {
+const SecondProfileForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error }) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState<OrderFormData>({
     code: '',
@@ -18,7 +18,7 @@ const ProfileForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error }) =
 
     // ✔️ Ensure at least 6 numeric digits
     if (!/^\d{6,}$/.test(formData.code)) {
-      setLocalError(t('profileForm.codeLengthError'));
+      setLocalError(t('secondProfileForm.codeLengthError'));
       return;
     }
 
@@ -35,11 +35,11 @@ const ProfileForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error }) =
   };
 
   return (
-    <form className="order-form" onSubmit={handleSubmit}>
+    <form className="secondProfileForm" onSubmit={handleSubmit}>
       <Input
         value={formData.code}
         onChange={handleCodeChange}
-        placeholder={t('profileForm.placeholder')}
+        placeholder={t('secondProfileForm.placeholder')}
         fullWidth
         size="medium"
         required
@@ -49,13 +49,13 @@ const ProfileForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error }) =
       />
 
       {localError && (
-        <div className="order-form__error">
+        <div className="secondProfileForm__error">
           {localError}
         </div>
       )}
 
       <Button
-        text={t('profileForm.submitButton')}
+        text={t('secondProfileForm.submitButton')}
         type="submit"
         isLoading={isLoading}
         disabled={isLoading}
@@ -65,12 +65,12 @@ const ProfileForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error }) =
       />
 
       {error && (
-        <div className="order-form__error">
-          {t('profileForm.robotError')}
+        <div className="secondProfileForm__error">
+          {t('secondProfileForm.robotError')}
         </div>
       )}
     </form>
   );
 };
 
-export default ProfileForm;
+export default SecondProfileForm;

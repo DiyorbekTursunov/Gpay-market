@@ -13,7 +13,6 @@ export const RuTranslation = {
     },
     contactTitle: "Связаться с продавцом",
     telegramText: "У нас раздачи игр! Подпишись",
-
     profilePage: {
       headerText: "Для активации DLC нужна основная игра на аккаунте",
     },
@@ -24,6 +23,12 @@ export const RuTranslation = {
     },
     profileRight: {
       title: "Оформление заказа",
+      title2: "Проверка профиля",
+      title3: "Проверка профиля",
+      title4: "Очередь",
+      title5: "Отправляется",
+      title6: "Удачная покупка",
+      title7: "Отзыв",
       dropdownHeader: "Где взять ссылку?",
       dropdownStep1:
         "1. Введите ссылку быстрого приглашения или код друга на ваш аккаунт Steam — сделка пройдет быстрее. Найти это можно в Steam → Друзья → Добавить друга.",
