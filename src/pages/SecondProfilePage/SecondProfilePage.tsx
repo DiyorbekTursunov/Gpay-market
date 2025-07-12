@@ -19,6 +19,7 @@ const SecondProfilePage: React.FC = () => {
   const { t } = useTranslation();
   const images = [profilePageBackground1, profilePageBackground2];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  console.log(currentImageIndex);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -150,34 +151,33 @@ const SecondProfilePage: React.FC = () => {
               https://steamcommunity.com/profiles/steamid64
             </a>
           </div>
-        <div className="form">
-          <Button
-            text={t("Это мой аккаунт 1 мин 59 с")}
-            type="submit"
-            fullWidth
-            variant="primary"
-            size="medium"
-          />
-
-          <Button
-            text={t("Сменить аккаунт")}
-            type="submit"
-            fullWidth
-            variant="secondary"
-            size="medium"
-          />
-
-          <div className="order-page__bottom">
-            <LanguageSelector />
-            <TelegramLink
-              url="/"
-              text={t("telegramText")}
-              title={t("telegramText")}
+          <div className="form">
+            <Button
+              text={t("Это мой аккаунт 1 мин 59 с")}
+              type="submit"
+              fullWidth
+              variant="primary"
+              size="medium"
             />
+
+            <Button
+              text={t("Сменить аккаунт")}
+              type="submit"
+              fullWidth
+              variant="secondary"
+              size="medium"
+            />
+
+            <div className="order-page__bottom">
+              <LanguageSelector />
+              <TelegramLink
+                url="/"
+                text={t("telegramText")}
+                title={t("telegramText")}
+              />
+            </div>
           </div>
         </div>
-        </div>
-
       </div>
     </div>
   );

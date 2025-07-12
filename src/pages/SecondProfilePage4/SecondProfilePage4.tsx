@@ -1,24 +1,20 @@
 import profilePageBackground1 from "../../assets/background/profile_page_background_1.png";
 import profilePageBackground2 from "../../assets/background/profile_page_background_2.png";
 import "./SecondProfilePage.css";
-import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import atomic from "../../assets/background/profile_page_background_1.png";
 import pubgImg from "../../assets/background/pubgImg.png";
 import question from "../../assets/background/waht.png";
-import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
-import TelegramLink from "../../components/TelegramLink/TelegramLink";
-import { Button } from "../../components/UI";
 
 const SecondProfilePage4: React.FC = () => {
   const params = useParams();
   console.log(params.id);
 
-  const { t } = useTranslation();
   const images = [profilePageBackground1, profilePageBackground2];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  console.log(currentImageIndex);
 
   useEffect(() => {
     const interval = setInterval(() => {

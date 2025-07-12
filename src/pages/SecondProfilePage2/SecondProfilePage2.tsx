@@ -19,6 +19,7 @@ const SecondProfilePage2: React.FC = () => {
   const { t } = useTranslation();
   const images = [profilePageBackground1, profilePageBackground2];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  console.log(currentImageIndex);
 
   useEffect(() => {
     const interval = setInterval(() => {
