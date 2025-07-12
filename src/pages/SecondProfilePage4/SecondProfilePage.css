@@ -391,8 +391,8 @@
   }
   .profile__right__title  {
     font-size: 20px;
-    position: absolute;
-    left: 36%;
+    /* position: absolute; */
+    /* left: 36%; */
     top: 150px;
   }
   .profile__left__img1 {

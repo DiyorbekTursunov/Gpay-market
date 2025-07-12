@@ -7,9 +7,14 @@ import { useParams } from "react-router-dom";
 import atomic from "../../assets/background/profile_page_background_1.png";
 import pubgImg from "../../assets/background/pubgImg.png";
 import question from "../../assets/background/waht.png";
+import { Button } from "../../components/UI";
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
+import TelegramLink from "../../components/TelegramLink/TelegramLink";
+import { useTranslation } from "react-i18next";
 
 const SecondProfilePage4: React.FC = () => {
   const params = useParams();
+  const { t } = useTranslation();
   console.log(params.id);
 
   const images = [profilePageBackground1, profilePageBackground2];
@@ -59,11 +64,7 @@ const SecondProfilePage4: React.FC = () => {
 
       <div className="profile__container">
         <div className="profile__left">
-          <img
-            src={atomic}
-            alt="atomic heart"
-            className="profile__left__img"
-          />
+          <img src={atomic} alt="atomic heart" className="profile__left__img" />
           <img
             src={pubgImg}
             alt="atomic heart"
@@ -150,6 +151,27 @@ const SecondProfilePage4: React.FC = () => {
               Обычно процедура занимает около 3-ех минут...
             </p>
           </div>
+
+          <div className="form">
+            <Button
+              text={t("Сменить аккаунт")}
+              type="submit"
+              fullWidth
+              variant="secondary"
+              size="medium"
+            />
+            <h3 className="profile__right__second">Связаться с продавцом</h3>
+
+            <div className="order-page__bottom">
+              <LanguageSelector />
+              <TelegramLink
+                url="/"
+                text={t("telegramText")}
+                title={t("telegramText")}
+              />
+            </div>
+          </div>
+
           <h3 className="profile__right__second">Связаться с продавцом</h3>
         </div>
       </div>
