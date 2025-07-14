@@ -1,0 +1,62 @@
+@use '../../styles/variables' as *;
+
+.second-profile__left {
+    max-width: 1106px;
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid var(--color-border);
+    padding: 30px;
+
+    &__bottom__text {
+        max-width: 300px;
+        @include font-base;
+        font-size: 20px;
+        line-height: 130%;
+        color: var(--color-primary);
+    }
+
+    &__img {
+        display: flex;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &__title {
+        @include font-base;
+        font-size: 40px;
+        line-height: 52px;
+        margin-bottom: 23px;
+        color: var(--color-primary);
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 23px;
+
+        &__text {
+            @include font-base;
+            font-size: 20px;
+            line-height: 130%;
+            margin-right: 20px;
+            color: var(--color-primary);
+        }
+
+        &__info {
+            padding: 6px 14px;
+            background-color: var(--bg-secondary);
+            border: 2px solid var(--color-accent);
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            border-radius: 10px;
+            @include font-base;
+            font-size: 20px;
+            line-height: 130%;
+            color: var(--color-primary);
+        }
+    }
+}

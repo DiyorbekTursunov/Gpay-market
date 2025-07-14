@@ -1,0 +1,51 @@
+@use '../../../styles/variables.scss' as *;
+
+.third-order-form {
+    width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 100%;
+    margin-bottom: 20px;
+
+    &__title {
+        @include font-base;
+        font-size: 25px;
+        line-height: 130%;
+        color: var(--color-primary);
+        margin-bottom: 20px;
+        text-align: center;
+
+        @include mobile {
+            font-size: 20px;
+        }
+    }
+
+
+
+    &__error {
+        color: #ff4444;
+        @include font-base;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    &__link {
+        color: var(--color-primary);
+        @include font-base;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 20px;
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    // Small mobile breakpoint
+    @media (max-width: 520px) {
+        &__link {
+            font-size: 14px;
+        }
+    }
+}

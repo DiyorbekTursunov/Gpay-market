@@ -1,5 +1,5 @@
 import ProfileLeft from "../../components/ProfileLeft/ProfileLeft";
-import ProfileRight from "../../components/ProfileRight/ProfileRight";
+import ProfileRight from "../../components/ProfileRightPages/ProfileRight/ProfileRight";
 import profilePageBackground1 from "../../assets/background/profile_page_background_1.png";
 import profilePageBackground2 from "../../assets/background/profile_page_background_2.png";
 import logo from "../../assets/logo/logos.svg";
