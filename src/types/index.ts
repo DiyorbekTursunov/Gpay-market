@@ -78,8 +78,8 @@ export interface OrderFormData {
 
 export interface OrderFormProps {
   onSubmit: (data: OrderFormData) => void;
-  isLoading: boolean;
-  error: string;
+  isLoading?: boolean;
+  error?: string;
 }
 
 // API response types based on OpenAPI schema
