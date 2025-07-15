@@ -29,18 +29,12 @@
 
     &:hover,
     &:focus-visible {
-        opacity: .8px;
+        border: 2px solid;
+        border-image-source: linear-gradient(0deg, #A852FF 0%, #7921D1 100%);
     }
 
     &:active {
-        background-color: var(--color-accent);
-        border-color: var(--color-primary);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
-        transform: translateY(0) scale(1);
-
-        .steam__btn__text {
-            color: var(--bg-secondary);
-        }
+        border: 2px solid var(--color-accent);
     }
 }
 

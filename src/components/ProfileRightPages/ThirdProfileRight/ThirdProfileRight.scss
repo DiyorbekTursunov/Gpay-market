@@ -185,7 +185,7 @@
 // Small mobile breakpoint
 @media (max-width: 520px) {
     .desctop-second-profile__left {
-        display: none;
+        display: none !important;
     }
 }
 

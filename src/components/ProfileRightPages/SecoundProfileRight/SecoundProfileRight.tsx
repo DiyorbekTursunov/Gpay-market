@@ -148,7 +148,7 @@ const SecoundProfileRight: React.FC<ProfileLeftProps> = ({
 
         <div className="order-page__bottom">
           <LanguageSelector />
-          <TelegramLink
+          <TelegramLink 
             url="/"
             text={t("telegramText")}
             title={t("telegramText")}

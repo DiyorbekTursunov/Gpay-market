@@ -3,13 +3,15 @@ import profilePageBackground2 from "../../assets/background/profile_page_backgro
 import logo from "../../assets/logo/logos.svg";
 import "./LastProfilePage.scss";
 import { useState, useEffect } from "react";
-import SecondProfileLeft from "../../components/SecoundProfileLeft/SecondProfileLeft"; // Corrected typo
+import SecondProfileLeft from "../../components/SecoundProfileLeft/SecondProfileLeft";
 import SixthProfileRight from "../../components/ProfileRightPages/SixthProfileRight/SixthProfileRight";
 import { Link } from "react-router-dom";
+import SendReviewProfileRight from "../../components/ProfileRightPages/SendReviewProfileRight/SendReviewProfileRight";
 
 const LastProfilePage: React.FC = () => {
   const images = [profilePageBackground1, profilePageBackground2];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showReviewForm, setShowReviewForm] = useState(false); // New state
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,7 +27,6 @@ const LastProfilePage: React.FC = () => {
         {/* Mobile header - hidden on desktop */}
         <div className="last-profile__header">
           <img className="last-profile__logo" src={logo} alt="game logo" />
-
           <Link to={"/"} className="last-profile__header__close_button">
             <svg
               width="14"
@@ -53,7 +54,7 @@ const LastProfilePage: React.FC = () => {
         />
 
         <div className="last-profile__container">
-          <SecondProfileLeft // Corrected component name
+          <SecondProfileLeft
             imgSrc={images[currentImageIndex]}
             title="Command & Conquer™ Red Alert™ 3- Uprising"
             orderId="99999999"
@@ -61,12 +62,22 @@ const LastProfilePage: React.FC = () => {
             activationTime="00:00:00"
           />
 
-          <SixthProfileRight
-            title="Command & Conquer™ Red Alert™ 3- Uprising"
-            orderId="99999999"
-            dlcLabel="DLC"
-            activationTime="00:00:00"
-          />
+          {showReviewForm ? (
+            <SendReviewProfileRight
+              title="Command & Conquer™ Red Alert™ 3- Uprising"
+              orderId="99999999"
+              dlcLabel="DLC"
+              activationTime="00:00:00"
+            />
+          ) : (
+            <SixthProfileRight
+              title="Command & Conquer™ Red Alert™ 3- Uprising"
+              orderId="99999999"
+              dlcLabel="DLC"
+              activationTime="00:00:00"
+              onReviewButtonClick={() => setShowReviewForm(true)} // Pass callback
+            />
+          )}
         </div>
       </div>
     </div>

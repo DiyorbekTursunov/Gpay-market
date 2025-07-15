@@ -1,0 +1,48 @@
+.profile__likes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    margin-bottom: 25px;
+}
+
+.profile__btns {
+    width: 100%;
+    background-color: #252525;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 12px 18px;
+    border: none;
+}
+
+.like-button {
+    &:not(.like-button--liked) {
+        &:hover {
+            background: linear-gradient(180deg, #252525 0%, #414141 100%);
+        }
+
+        &:active {
+            background: linear-gradient(0deg, #252525 0%, #162D18 100%);
+        }
+    }
+
+    &--liked {
+        background: #162D18;
+    }
+}
+
+.dislike-button {
+    &:not(.dislike-button--disliked) {
+        &:hover {
+            background: linear-gradient(180deg, #252525 0%, #414141 100%);
+        }
+
+        &:active {
+            background: linear-gradient(0deg, #252525 0%, #341010 100%);
+        }
+    }
+
+    &--disliked {
+        background: #341010;
+    }
+}

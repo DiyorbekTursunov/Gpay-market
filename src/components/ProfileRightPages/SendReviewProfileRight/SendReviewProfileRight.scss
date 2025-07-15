@@ -1,7 +1,37 @@
 @use '../../../styles/variables' as *;
 
-.secound-profile__right {
-    max-width: 432px;
+.send-review-profile__right {
+    max-width: 452px;
+
+
+    .last-profile__header__close_button {
+        cursor: pointer;
+        padding-top: 40px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        background-color: transparent;
+        text-decoration: none;
+        @include font-base;
+        color: var(--color-primary);
+        border: none;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 130%;
+        text-align: center;
+        transition: all;
+        transition-duration: .3s;
+
+        &:hover {
+            opacity: .7;
+        }
+
+        &:active {
+            opacity: .5;
+        }
+    }
 
     &__title {
         @include font-base;
@@ -9,16 +39,17 @@
         line-height: 130%;
         color: var(--color-primary);
         text-align: center;
-        margin-bottom: 25px;
+        margin-bottom: 34px;
     }
 
 
-    .second-profile__left__row__text__2 {
+    .send-review-profile__left__row__text__2 {
         @include font-base;
         font-size: 14px;
         line-height: 130%;
         color: var(--color-primary);
         text-align: center;
+        margin-top: 34px;
         margin-bottom: 25px;
     }
 
@@ -73,12 +104,13 @@
 
 // Small mobile breakpoint
 @media (max-width: 520px) {
-    .secound-profile__right__title {
+    .send-review-profile__right__title {
         font-size: 20px;
         margin-bottom: 0;
+        color: #0DC11F;
     }
 
-    .secound-dropdown {
+    .send-review-dropdown {
         margin-bottom: 10px;
         max-height: 17px;
 
@@ -103,33 +135,37 @@
         }
     }
 
-    .secound-profile__right__or_text {
+    .send-review-profile__right__or_text {
         font-size: 14px;
         margin-bottom: 10px;
     }
 
-    .secound-profile__right {
+    .send-review-profile__right {
         width: 100%;
+
+        .last-profile__header__close_button {
+            display: none;
+        }
     }
 
-    .secound-order-form {
+    .send-review-order-form {
         width: 100%;
     }
 }
 
 
 // Mobile Adaptive design
-.desctop-second-profile__left {
+.desctop-send-review-profile__left {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     img {
-        margin-bottom: 25px;
+        margin-bottom: 34px;
     }
 
-    .desctop-second-profile__left__title {
+    .desctop-send-review-profile__left__title {
         margin-top: 12px;
         font-size: 20px;
         text-align: center;
@@ -139,7 +175,7 @@
         margin-bottom: 8px;
     }
 
-    .desctop-second-profile__left__row__text {
+    .desctop-send-review-profile__left__row__text {
         @include font-base;
         font-size: 20px;
         line-height: 130%;
@@ -149,7 +185,7 @@
         display: none
     }
 
-    .desctop-second-profile__left__row__text__2 {
+    .desctop-send-review-profile__left__row__text__2 {
         @include font-base;
         font-size: 20px;
         line-height: 130%;
@@ -161,7 +197,7 @@
     }
 
 
-    .desctop-second-profile__left__row__text__link {
+    .desctop-send-review-profile__left__row__text__link {
         @include font-base;
         font-size: 20px;
         line-height: 130%;
@@ -172,7 +208,7 @@
         margin-bottom: 20px;
     }
 
-    .desctop-second-profile__left__row {
+    .desctop-send-review-profile__left__row {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -182,20 +218,17 @@
 
 // Small mobile breakpoint
 @media (max-width: 520px) {
-    .desctop-second-profile__left {
-        .desctop-second-profile__left__row__text__2 {
+    .desctop-send-review-profile__left {
+        .desctop-send-review-profile__left__row__text__2 {
             font-size: 14px;
+            width: 100%;
         }
-    }
-
-    .desctop-second-profile__left {
-        display: none;
     }
 }
 
 
 // Mobile Adaptive design
-.mobile-second-profile__left {
+.mobile-send-review-profile__left {
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -204,7 +237,7 @@
     margin-top: 0px;
 
 
-    .second-profile__left__title {
+    .send-review-profile__left__title {
         margin-top: 12px;
         font-size: 20px;
         text-align: center;
@@ -214,7 +247,7 @@
         margin-bottom: 8px;
     }
 
-    .second-profile__left__row__text {
+    .send-review-profile__left__row__text {
         @include font-base;
         font-size: 14px;
         line-height: 130%;
@@ -223,7 +256,7 @@
         margin-top: 8px;
     }
 
-    .second-profile__left__row__text__2 {
+    .send-review-profile__left__row__text__2 {
         @include font-base;
         font-size: 14px;
         line-height: 130%;
@@ -234,7 +267,7 @@
     }
 
 
-    .second-profile__left__row__text__link {
+    .send-review-profile__left__row__text__link {
         @include font-base;
         font-size: 14px;
         line-height: 130%;
@@ -248,7 +281,7 @@
         margin-bottom: 18px;
     }
 
-    .second-profile__left__row {
+    .send-review-profile__left__row {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -259,11 +292,21 @@
 
 // Small mobile breakpoint
 @media (max-width: 520px) {
-    .second-profile__left {
+    .send-review-profile__left {
         display: none;
     }
 
-    .mobile-second-profile__left {
+    .mobile-send-review-profile__left {
         display: flex;
+
+        .send-review-profile__left__row__text {
+            margin-bottom: 28px;
+        }
+    }
+
+    .desctop-send-review-profile__left {
+        img {
+            margin-bottom: 28px;
+        }
     }
 }

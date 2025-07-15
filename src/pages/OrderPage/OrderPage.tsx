@@ -17,7 +17,7 @@ const OrderPage: React.FC = () => {
 
   const handleFormSubmit = async (data: OrderFormData) => {
     setIsLoading(true);
-    setError('');
+    setError('');x
     try {
       await new Promise((r) => setTimeout(r, 2000));
       console.log('Form submitted:', data);
