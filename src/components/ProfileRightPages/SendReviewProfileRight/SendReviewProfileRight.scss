@@ -21,16 +21,7 @@
         font-size: 20px;
         line-height: 130%;
         text-align: center;
-        transition: all;
-        transition-duration: .3s;
 
-        &:hover {
-            opacity: .7;
-        }
-
-        &:active {
-            opacity: .5;
-        }
     }
 
     &__title {
@@ -223,6 +214,11 @@
             font-size: 14px;
             width: 100%;
         }
+    }
+
+
+    .desctop-second-profile__left {
+        display: flex;
     }
 }
 

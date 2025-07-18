@@ -44,7 +44,7 @@ const OrderPage: React.FC = () => {
             error={error}
           />
 
-          <Link to={"#"} className="order-page__contact-title">
+          <Link to={"#"} className="order-page__contact-title default-hover-active">
             {t('contactTitle')}
           </Link>
 

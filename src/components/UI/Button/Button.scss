@@ -13,7 +13,6 @@
     margin-bottom: 5px;
     @include flex-center;
 
-
     // Base size - medium
     &--medium {
         font-size: 20px;
@@ -52,16 +51,18 @@
 
     // Primary variant
     &--primary {
-        background: var(--color-accent);
+        background-color: var(--color-accent); // Assumes #7921D1
         color: var(--color-primary);
 
         &:hover:not(.button--disabled) {
-            background: linear-gradient(180deg, #7921D1 0%, #A852FF 100%);
-            transform: translateY(-1px);
+            background-color: #A852FF; // Solid color for smooth transition
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         &:active:not(.button--disabled) {
-            background: linear-gradient(180deg, #540A9D 0%, #7921D1 112.5%);
+            background-color: #540A9D;
+            transform: translateY(0);
+            box-shadow: none;
         }
     }
 
@@ -71,13 +72,16 @@
         color: var(--color-primary);
         border: 2px solid #7921D1;
 
+
         &:hover:not(.button--disabled) {
-            background: linear-gradient(180deg, #7921D1 0%, #A852FF 100%);
-            transform: translateY(-1px);
+            border-color: #A852FF;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         &:active:not(.button--disabled) {
-            background: linear-gradient(180deg, #540A9D 0%, #7921D1 112.5%);
+            border-color: var(--color-accent);
+            transform: translateY(0);
+            box-shadow: none;
         }
     }
 

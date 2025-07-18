@@ -112,7 +112,7 @@ const ThirdProfileRight: React.FC<ProfileLeftProps> = ({
         </p>
 
         <p className="second-profile__left__row__text__2">
-          <Link className="second-profile__left__row__text__link" to={"#"}>
+          <Link className="second-profile__left__row__text__link default-hover-active" to={"#"}>
             https://steamcommunity.com/profiles/steamid64
           </Link>
           Вам отправлен запрос на добавление друзья в Steam. Вам необходимо
@@ -139,7 +139,7 @@ const ThirdProfileRight: React.FC<ProfileLeftProps> = ({
 
           <p className="desctop-second-profile__left__row__text__2">
             <Link
-              className="desctop-second-profile__left__row__text__link"
+              className="desctop-second-profile__left__row__text__link default-hover-active"
               to={"#"}
             >
               https://steamcommunity.com/profiles/steamid64

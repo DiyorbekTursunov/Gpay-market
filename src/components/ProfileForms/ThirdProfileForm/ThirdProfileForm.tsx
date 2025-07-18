@@ -61,7 +61,7 @@ const ThirdProfileForm: React.FC<OrderFormProps> = ({
         </div>
       )}
 
-      <Link className="third-order-form__link" to={"#"}>Связаться c продавцом</Link>
+      <Link className="third-order-form__link default-hover-active" to={"#"}>Связаться c продавцом</Link>
     </form>
   );
 };

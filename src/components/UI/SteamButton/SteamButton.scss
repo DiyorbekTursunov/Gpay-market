@@ -27,14 +27,15 @@
         transition: color 0.2s;
     }
 
-    &:hover,
-    &:focus-visible {
-        border: 2px solid;
-        border-image-source: linear-gradient(0deg, #A852FF 0%, #7921D1 100%);
+    &:hover:not(.button--disabled) {
+        border-color: #A852FF;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
-    &:active {
-        border: 2px solid var(--color-accent);
+    &:active:not(.button--disabled) {
+        border-color: var(--color-accent);
+        transform: translateY(0);
+        box-shadow: none;
     }
 }
 
