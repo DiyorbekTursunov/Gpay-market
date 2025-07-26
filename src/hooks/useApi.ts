@@ -72,6 +72,14 @@ export interface CheckCodeResponse {
   errorCode: CheckCodeError;
 }
 
+export interface checkFriendResponse {
+  isCorrectCode: boolean | null;
+  gameSession: GameSessionInfo;
+  isRobotCheck: boolean;
+  isValidCaptcha: boolean | null;
+  errorCode: CheckCodeError;
+}
+
 export interface LastOrder {
   userName: string | null;
   gameName: string | null;
@@ -114,22 +122,17 @@ export const checkCode = async (
 export const changeSteamContact = async (
   uniqueCode: string,
   steamContact: string
-): Promise<GameSessionInfo> => {
+): Promise<void> => {
   try {
     const formData = new FormData();
     formData.append("uniquecode", uniqueCode);
     formData.append("steamContact", steamContact);
 
-    const response = await apiClient.post(
-      "/gamesession/steamcontact",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    return response.data;
+    await apiClient.post("/gamesession/steamcontact", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   } catch (error) {
     console.error("Change steam contact error:", error);
     throw error;
@@ -196,10 +199,12 @@ export const resetBot = async (
   }
 };
 
-export const checkFriend = async (uniqueCode: string): Promise<void> => {
+export const checkFriend = async (
+  uniqueCode: string
+): Promise<checkFriendResponse> => {
   try {
-    await apiClient.post(
-      "/gamesession/checkfriend",
+    const response: AxiosResponse<checkFriendResponse> = await apiClient.post(
+      "/gamesession/checkfrined",
       {},
       {
         params: {
@@ -207,6 +212,7 @@ export const checkFriend = async (uniqueCode: string): Promise<void> => {
         },
       }
     );
+    return response.data;
   } catch (error) {
     console.error("Check friend error:", error);
     throw error;
@@ -254,7 +260,7 @@ export class ApiService {
   async changeSteamContact(
     uniqueCode: string,
     steamContact: string
-  ): Promise<GameSessionInfo> {
+  ): Promise<void> {
     return changeSteamContact(uniqueCode, steamContact);
   }
 
@@ -270,7 +276,7 @@ export class ApiService {
     return resetBot(uniqueCode);
   }
 
-  async checkFriend(uniqueCode: string): Promise<void> {
+  async checkFriend(uniqueCode: string): Promise<checkFriendResponse> {
     return checkFriend(uniqueCode);
   }
 

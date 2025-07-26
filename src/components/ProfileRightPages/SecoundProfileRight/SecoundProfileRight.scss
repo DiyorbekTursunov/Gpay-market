@@ -1,5 +1,12 @@
 @use '../../../styles/variables' as *;
 
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .secound-profile__right {
     max-width: 432px;
 
@@ -114,7 +121,8 @@
     .secound-profile__right {
         width: 100%;
     }
-    .secound-order-form{
+
+    .secound-order-form {
         width: 100%;
     }
 }
@@ -128,6 +136,8 @@
     align-items: center;
 
     img {
+        border-radius: 50%;
+        border: #A852FF solid 1px;
         margin-bottom: 25px;
     }
 
@@ -184,7 +194,7 @@
 // Small mobile breakpoint
 @media (max-width: 520px) {
     .desctop-second-profile__left {
-        // display: none !important;
+        display: none;
     }
 }
 
@@ -240,6 +250,7 @@
     }
 
     img {
+        border-radius: 50%;
         margin-bottom: 18px;
     }
 
@@ -257,7 +268,8 @@
     .second-profile__left {
         display: none;
     }
-    .mobile-second-profile__left{
+
+    .mobile-second-profile__left {
         display: flex;
     }
 }

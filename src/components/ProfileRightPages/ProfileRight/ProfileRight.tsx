@@ -6,21 +6,24 @@ import TelegramLink from "../../TelegramLink/TelegramLink";
 import { SteamButton } from "../../UI/SteamButton/SteamButton";
 import { OrderFormData } from "../../../types";
 import "./ProfileRight.scss";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../store";
 
 const ProfileRight: React.FC = () => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const error = useSelector((state: RootState) => state.error.message);
+
+  console.log(error);
 
   const handleFormSubmit = async (data: OrderFormData) => {
     setIsLoading(true);
-    setError("");
+
     try {
       await new Promise((r) => setTimeout(r, 2000));
       console.log("Form submitted:", data);
     } catch {
-      setError(t("orderForm.robotError"));
     } finally {
       setIsLoading(false);
     }
@@ -28,6 +31,8 @@ const ProfileRight: React.FC = () => {
 
   return (
     <div className="profile__right">
+      {error && <div className="secound-profile__error mobile_hidden">{error}</div>}
+
       <h1 className="profile__right__title mobile_hidden">
         {t("profileRight.title")}
       </h1>

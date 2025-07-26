@@ -61,6 +61,20 @@
             font-size: 20px;
             line-height: 130%;
             color: var(--color-primary);
+
+            .profile__left__row__info__explanation {
+                width: 113px;
+                height: 62px;
+                padding: 0;
+                // padding: 9px;
+            }
+
+            .profile__left__row__info__explanation_activation {
+                width: 274px;
+                height: 116px;
+                padding: 0;
+                // padding: 9px;
+            }
         }
     }
 }
@@ -98,10 +112,10 @@
 
         &__row {
             position: absolute;
-            bottom: 110px;
+            bottom: 130px;
             left: 50%;
             transform: translateX(-50%);
-            //   flex-wrap: nowrap;
+            // flex-wrap: nowrap;
             justify-content: center;
             display: flex;
             width: 100%;

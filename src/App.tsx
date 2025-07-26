@@ -1,19 +1,22 @@
-import React from "react";
-import OrderPage from "./pages/OrderPage/OrderPage";
+import type React from "react";
+import { Provider } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { store } from "./store/store";
+import OrderPage from "./pages/OrderPage/OrderPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import SecondProfilePage from "./pages/SecoundProfilePage/SecondProfilePage";
 import LastProfilePage from "./pages/LastProfilePage/LastProfilePage";
 
 const App: React.FC = () => {
   return (
-    <Routes>
-      <Route path="/order" element={<OrderPage />} />
-      <Route path="/" element={<ProfilePage />} />
-      <Route path="/uniquecode/:id" element={<SecondProfilePage />} />
-      <Route path="/uniquecode-last/:id" element={<LastProfilePage />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <Provider store={store}>
+      <Routes>
+        <Route path="/" element={<OrderPage />} />
+        <Route path="/uniquecode/:id" element={<ProfilePage />} />
+        {/* <Route path="/uniquecode/:id" element={<SecondProfilePage />} /> */}
+        <Route path="/uniquecode-last/:id" element={<LastProfilePage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Provider>
   );
 };
 

@@ -1,20 +1,18 @@
 @use '../../styles/variables' as *;
 
 
-.telegram-link {
+.explanation {
     position: relative;
     ;
     &__back-ground {
-        right: 0;
+        left: -50px;
         position: absolute;
         top: -65px;
-        background-image: url(../../assets//background/telegram-link-bg.png);
+        background-image: url(../../assets//background/explanation-link-bg.png);
         background-repeat: no-repeat;
+        border-radius: 4px;
         z-index: 10;
-
-
-        width: 144px;
-        height: 62px;
+        padding: 7px 11px;
 
         @include mobile {
             display: none
@@ -45,7 +43,7 @@
 }
 
 
-.telegram-link {
+.explanation {
     position: relative;
 
     &__back-ground {
@@ -54,8 +52,8 @@
         pointer-events: none;
     }
 
-    &__icon:hover~.telegram-link__back-ground,
-    &:hover .telegram-link__back-ground {
+    &__icon:hover~.explanation__back-ground,
+    &:hover .explanation__back-ground {
         opacity: 1;
         pointer-events: auto;
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import { TelegramLinkProps } from "../../types";
+import { TelegramLinkProps } from "../../types/index";
 import "./TelegramLink.scss";
 import telegramIcon from "../../assets/icons/telegram.svg";
 

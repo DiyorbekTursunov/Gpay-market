@@ -1,5 +1,5 @@
-// components/UI/index.ts
-export { default as Button } from './Button/Button';
-export { default as Input } from './Input/Input';
-export type { ButtonProps } from './Button/Button';
-export type { InputProps } from './Input/Input';
+export { default as Button } from "./Button/Button"
+export { default as Input } from "./Input/Input"
+export { default as ReactionButton } from "./ReactionButton/ReactionButton"
+export { default as Textarea } from "./Textarea/Textarea"
+export { default as Captcha } from "./Captcha/Captcha"

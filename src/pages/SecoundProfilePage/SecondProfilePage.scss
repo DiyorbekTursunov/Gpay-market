@@ -1,10 +1,11 @@
 @use '../../styles/variables.scss' as *;
 
-.second-profile {
+.profile {
     background-color: var(--bg-primary);
     min-height: 100vh;
     padding-top: 15px;
     padding-bottom: 20px;
+    overflow-y: hidden;
 
     &__logo {
         margin-left: auto;
@@ -28,6 +29,20 @@
 
     &__header {
         display: none;
+
+        .secound-profile__error {
+            max-width: 230px;
+            margin-left: 31px;
+            @include font-base;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 7px 11px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            color: var(--color-error);
+            border: 2px solid var(--color-error);
+            background-color: var(--color-error-background);
+        }
     }
 }
 
@@ -40,40 +55,31 @@
 }
 
 @media (max-width: 1520px) {
-    .second-profile__container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+    .profile__container {
+        flex-direction: column;
     }
 }
 
 // Make sure the 'mobile' mixin is defined in your variables or mixins file
 @include mobile {
-    .second-profile__left__title {
+    .profile__left__title {
         font-size: 24px;
         line-height: 1.3;
         margin-top: 12px;
     }
 
-    .second-profile__left__row {
+    .profile__left__row {
         flex-wrap: wrap;
     }
 
-    .second-profile__left__row__info__text,
-    .second-profile__left__row__text {
+    .profile__left__row__info__text,
+    .profile__left__row__text {
         font-size: 16px;
     }
 }
 
 @media (max-width: 520px) {
-    .second-profile {
-        background-image: url(../../assets/background/pubgImg.png);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .second-profile-bg {
+    .profile {
         background: linear-gradient(0deg, #161616, #161616),
             linear-gradient(360deg,
                 rgba(22, 22, 22, 0.2) 48.36%,
@@ -81,11 +87,7 @@
         background-blend-mode: overlay;
     }
 
-    .second-profile__container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    .profile__container {
         margin-top: 25px;
         gap: 12px;
         padding-left: 10px;
@@ -100,7 +102,7 @@
         display: block;
     }
 
-    .second-profile__logo {
+    .profile__logo {
         margin-left: 0;
         margin-right: -20px;
         margin-bottom: 0;
@@ -108,7 +110,7 @@
         height: 25px;
     }
 
-    .second-profile__header {
+    .profile__header {
         display: flex;
         align-items: flex-start;
         gap: 40px;
@@ -121,7 +123,7 @@
         margin-bottom: 14px;
     }
 
-    .second-profile__header__text {
+    .profile__header__text {
         @include font-base;
         font-weight: 400;
         font-size: 14px;

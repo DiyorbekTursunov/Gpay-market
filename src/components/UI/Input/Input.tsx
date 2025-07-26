@@ -8,7 +8,7 @@ export interface InputProps {
   type?: 'text' | 'email' | 'password' | 'number' | 'tel';
   disabled?: boolean;
   required?: boolean;
-  error?: string;
+  error?: boolean;
   label?: string;
   size?: 'small' | 'medium' | 'large';
   fullWidth?: boolean;
@@ -88,12 +88,6 @@ const Input: React.FC<InputProps> = ({
         autoFocus={autoFocus}
         className={inputClasses}
       />
-
-      {error && (
-        <div className="input-error">
-          {error}
-        </div>
-      )}
     </div>
   );
 };

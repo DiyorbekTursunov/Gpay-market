@@ -67,24 +67,3 @@
         margin-top: 5px;
     }
 }
-
-.checkmark {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    background-color: var(--bg-primary);
-    border: 2px solid var(--color-primary);
-    border-radius: 4px;
-    transition: background-color var(--transition-default);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 25px 25px;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.order-form__checkbox-input:checked+.checkmark {
-    background-color: var(--color-accent);
-    border: none;
-  background-image: url('../../assets/icons/checkmark-image.svg');
-}

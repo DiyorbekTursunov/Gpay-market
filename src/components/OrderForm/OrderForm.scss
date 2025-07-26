@@ -1,102 +1,101 @@
 @use '../../styles/variables.scss' as *;
 
 .order-form {
-    max-width: 400px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    //   gap: 15px;
-
-    &__title {
-        @include font-base;
-        font-size: 25px;
-        line-height: 130%;
-        color: var(--color-primary);
-        margin-bottom: 20px;
-        text-align: center;
-
-    }
-
-    &__checkbox {
-                @include font-base;
-        position: relative;
+        max-width: 400px;
+        margin: auto;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        cursor: pointer;
-        margin-top: 20px;
-        margin-bottom: 0px !important;
-        color: var(--color-secondary);
-    }
+        flex-direction: column;
+        //   gap: 15px;
 
-    &__checkbox-input {
+        &__title {
+                @include font-base;
+                font-size: 25px;
+                line-height: 130%;
+                color: var(--color-primary);
+                margin-bottom: 20px;
+                text-align: center;
+        }
+
+        &__checkbox {
+                @include font-base;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                cursor: pointer;
+                margin-top: 20px;
+                margin-bottom: 0px !important;
+                color: var(--color-secondary);
+        }
+
+        &__checkbox-input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 25px;
+                height: 25px;
+                opacity: 0;
+                margin: 0;
+                z-index: 2;
+                cursor: pointer;
+        }
+
+        &__checkbox-label {
+                @include font-base;
+                color: var(--color-secondary);
+                font-size: 20px;
+                line-height: 100%;
+                text-align: center;
+                cursor: pointer;
+
+                @include mobile {
+                        font-size: 14px;
+                }
+        }
+
+        &__error {
+                color: #ff4444;
+                @include font-base;
+                font-size: 14px;
+                text-align: center;
+                margin-top: 5px;
+        }
+}
+
+.order-form__checkbox-input {
         position: absolute;
         top: 0;
-        left: 0;
+        left: 200px;
         width: 25px;
         height: 25px;
         opacity: 0;
         margin: 0;
-        z-index: 2;
-        cursor: pointer;
-    }
-
-    &__checkbox-label {
-        @include font-base;
-        color: var(--color-secondary);
-        font-size: 20px;
-        line-height: 100%;
-        text-align: center;
-        cursor: pointer;
-
-        @include mobile {
-            font-size: 14px;
-        }
-    }
-
-    &__error {
-        color: #ff4444;
-        @include font-base;
-        font-size: 14px;
-        text-align: center;
-        margin-top: 5px;
-    }
-}
-
-.order-form__checkbox-input {
-    position: absolute;
-    top: 0;
-    left: 200px;
-    width: 25px;
-    height: 25px;
-    opacity: 0;
-    margin: 0;
-    /* lower its stacking or just remove this */
-    z-index: 1;
+        /* lower its stacking or just remove this */
+        z-index: 1;
 }
 
 
 .checkmark {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    background-color: var(--bg-primary);
-    border: 2px solid var(--color-primary);
-    border-radius: 4px;
-    transition: background-color var(--transition-default);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 25px 25px;
-    /* allow it to sit on top of the input */
-    position: relative;
-    z-index: 2;
-    pointer-events: none;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--color-primary);
+        border-radius: 4px;
+        transition: background-color var(--transition-default);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 25px 25px;
+        /* allow it to sit on top of the input */
+        position: relative;
+        z-index: 2;
+        pointer-events: none;
 }
 
-.order-form__checkbox-input:checked ~ .checkmark {
-  background-color: var(--color-accent);
-  border-radius: 8px;
-  border: none;
-  background-image: url('../../assets/icons/checkmark-image.svg');
+.order-form__checkbox-input:checked~.checkmark {
+        //   background-color: var(--color-accent);
+        border-radius: 8px;
+        border: none;
+        background-image: url('../../assets/icons/checkmark-image.svg');
 }
