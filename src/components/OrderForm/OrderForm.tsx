@@ -2,6 +2,7 @@ import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Input } from "../UI";
+import Turnstile from "react-turnstile";
 import type { OrderFormProps, OrderFormData } from "../../types";
 import "./OrderForm.scss";
 
@@ -36,11 +37,13 @@ const OrderForm: React.FC<OrderFormProps> = ({
     }));
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTurnstileSuccess = (token: string) => {
     setFormData((prev) => ({
       ...prev,
-      isNotRobot: e.target.checked,
+      captcha: token,
+      isNotRobot: true,
     }));
+    setCaptchaValid(true);
   };
 
   return (
@@ -73,17 +76,14 @@ const OrderForm: React.FC<OrderFormProps> = ({
       />
 
       {needsCaptcha && (
-        <label className="order-form__checkbox">
-          <input
-            className="order-form__checkbox-input"
-            type="checkbox"
-            required
-            checked={formData.isNotRobot}
-            onChange={handleCheckboxChange}
+        <div className="order-form__captcha">
+          <Turnstile
+            sitekey="0x4AAAAAABl4DYo9EpI4hrne"
+            onSuccess={handleTurnstileSuccess}
+            onError={() => setCaptchaValid(false)}
+            onExpire={() => setCaptchaValid(false)}
           />
-          <span className="checkmark" />
-          {t("orderForm.notRobotLabel")}
-        </label>
+        </div>
       )}
       {error && <div className="order-form__error">{error}</div>}
     </form>
