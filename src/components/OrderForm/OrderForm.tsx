@@ -85,7 +85,6 @@ const OrderForm: React.FC<OrderFormProps> = ({
           />
         </div>
       )}
-      {error && <div className="order-form__error">{error}</div>}
     </form>
   );
 };

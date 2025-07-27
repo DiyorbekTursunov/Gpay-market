@@ -15,10 +15,6 @@
 
         width: 144px;
         height: 62px;
-
-        @include mobile {
-            display: none
-        }
     }
 
     &__text {
@@ -33,10 +29,6 @@
         border-radius: 4px;
         max-width: 144px;
         text-align: start;
-
-        @include mobile {
-            display: none;
-        }
     }
 
     &__icon {
@@ -47,16 +39,4 @@
 
 .telegram-link {
     position: relative;
-
-    &__back-ground {
-        opacity: 0;
-        transition: opacity 0.3s;
-        pointer-events: none;
-    }
-
-    &__icon:hover~.telegram-link__back-ground,
-    &:hover .telegram-link__back-ground {
-        opacity: 1;
-        pointer-events: auto;
-    }
 }

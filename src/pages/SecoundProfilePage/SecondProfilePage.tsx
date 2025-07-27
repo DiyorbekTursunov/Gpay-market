@@ -64,7 +64,7 @@ const SecondProfilePage: React.FC<SecondProfilePageProps> = ({
           src={logo || "/placeholder.svg"}
           alt="game logo"
         />
-        {gameSession?.isDlc && !error  && (
+        {gameSession?.isDlc && !error && (
           <p className="profile__header__text">{t("profilePage.headerText")}</p>
         )}
 

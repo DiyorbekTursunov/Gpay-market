@@ -91,6 +91,7 @@ const OrderPage: React.FC = () => {
 
   const displayError = getDisplayError();
 
+
   return (
     <section className="order-page">
       <div className="order-page__container">
@@ -100,7 +101,9 @@ const OrderPage: React.FC = () => {
           <img src={logo || "/placeholder.svg"} alt="game logo" />
         </div>
 
-
+        {error && (
+          <div className="secound-profile__error mobile_hidden">{error}</div>
+        )}
         <div className="order-page__content">
           <OrderForm
             onSubmit={handleFormSubmit}
