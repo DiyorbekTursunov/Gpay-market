@@ -1,5 +1,5 @@
 import type React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +19,7 @@ import {
 } from "../../store/slices/gameSessionSlice";
 import { getLastOrders, showTelegram } from "../../store/slices/orderSlice";
 import { getErrorMessage } from "../../utils/errorMessages";
+import { setError, clearError } from "../../store/slices/errorSlice";
 import "./OrderPage.scss";
 import { Link } from "react-router-dom";
 
@@ -26,11 +27,12 @@ const OrderPage: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [error, seterror] = useState(false);
 
   const {
     checkCodeResponse,
     loading,
-    error,
+    // error,
     needsCaptcha,
     sellerId: currentSellerId,
   } = useAppSelector((state) => state.gameSession);
@@ -68,20 +70,20 @@ const OrderPage: React.FC = () => {
       ).unwrap();
 
       if (result.isCorrectCode && result.gameSession) {
+        seterror(false);
         // Navigate to profile page with unique code
         navigate(`/uniquecode/${data.code}`);
+      } else {
+        seterror(true);
       }
     } catch (error) {
+      seterror(true);
       console.error("Error submitting form:", error);
     }
   };
 
   // Get error message based on API response
   const getDisplayError = (): string => {
-    if (error) {
-      return error;
-    }
-
     if (checkCodeResponse && !checkCodeResponse.isCorrectCode) {
       return getErrorMessage(checkCodeResponse.errorCode, t);
     }
@@ -90,7 +92,6 @@ const OrderPage: React.FC = () => {
   };
 
   const displayError = getDisplayError();
-
 
   return (
     <section className="order-page">
@@ -102,13 +103,15 @@ const OrderPage: React.FC = () => {
         </div>
 
         {error && (
-          <div className="secound-profile__error mobile_hidden">{error}</div>
+          <div className="secound-profile__error mobile_hidden">
+            Некорректный код заказа. <br /> Проверьте код ещё раз.
+          </div>
         )}
         <div className="order-page__content">
           <OrderForm
             onSubmit={handleFormSubmit}
             isLoading={loading}
-            error={displayError}
+            error={error}
             needsCaptcha={needsCaptcha}
           />
 

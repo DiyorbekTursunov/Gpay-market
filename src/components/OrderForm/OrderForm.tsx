@@ -63,6 +63,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
         name="code"
         id="order-code"
         autoComplete="off"
+        error={error}
       />
 
       <Button

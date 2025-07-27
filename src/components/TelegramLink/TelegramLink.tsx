@@ -33,7 +33,12 @@ const TelegramLink: React.FC<TelegramLinkProps> = ({ url, text, title }) => {
           <div className="telegram-link__text">{text}</div>
         </div>
       )}
-      <a href={url} title={title} className="telegram-link__icon">
+      <a
+        href={"https://t.me/GPay_Market"}
+        title={title}
+        target="_blank"
+        className="telegram-link__icon"
+      >
         <img src={telegramIcon} alt="telegram logo" />
       </a>
     </div>

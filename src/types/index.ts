@@ -21,7 +21,7 @@ export interface OrderFormProps {
   onSubmit: (data: OrderFormData) => Promise<void>;
   isLoading: boolean;
   needsCaptcha: boolean;
-  error: string;
+  error: boolean;
 }
 
 // Button component types
