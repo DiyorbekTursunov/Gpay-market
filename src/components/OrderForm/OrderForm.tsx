@@ -1,46 +1,54 @@
-import type React from "react"
-import { useState } from "react"
-import { useTranslation } from "react-i18next"
-import { Button, Input } from "../UI"
-import type { OrderFormProps, OrderFormData } from "../../types"
-import "./OrderForm.scss"
+import type React from "react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Button, Input } from "../UI";
+import type { OrderFormProps, OrderFormData } from "../../types";
+import "./OrderForm.scss";
 
-const OrderForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error, needsCaptcha = false }) => {
-  const { t } = useTranslation()
+const OrderForm: React.FC<OrderFormProps> = ({
+  onSubmit,
+  isLoading,
+  error,
+  needsCaptcha,
+}) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<OrderFormData>({
     code: "",
     isNotRobot: false,
     captcha: "",
-  })
-  const [captchaValid, setCaptchaValid] = useState(false)
+  });
+  const [captchaValid, setCaptchaValid] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (needsCaptcha && !captchaValid) {
-      return
+      return;
     }
 
-    onSubmit(formData)
-  }
+    onSubmit(formData);
+  };
 
   const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
       ...prev,
       code: e.target.value,
-    }))
-  }
+    }));
+  };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
       ...prev,
       isNotRobot: e.target.checked,
-    }))
-  }
+    }));
+  };
 
   return (
     <form className="order-form" onSubmit={handleSubmit}>
-      <h2 className="order-form__title" dangerouslySetInnerHTML={{ __html: t("orderForm.title") }} />
+      <h2
+        className="order-form__title"
+        dangerouslySetInnerHTML={{ __html: t("orderForm.title") }}
+      />
 
       <Input
         value={formData.code}
@@ -64,21 +72,22 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSubmit, isLoading, error, needs
         size="medium"
       />
 
-      <label className="order-form__checkbox">
-        <input
-          className="order-form__checkbox-input"
-          type="checkbox"
-          required
-          checked={formData.isNotRobot}
-          onChange={handleCheckboxChange}
-        />
-        <span className="checkmark" />
-        {t("orderForm.notRobotLabel")}
-      </label>
-
+      {needsCaptcha && (
+        <label className="order-form__checkbox">
+          <input
+            className="order-form__checkbox-input"
+            type="checkbox"
+            required
+            checked={formData.isNotRobot}
+            onChange={handleCheckboxChange}
+          />
+          <span className="checkmark" />
+          {t("orderForm.notRobotLabel")}
+        </label>
+      )}
       {error && <div className="order-form__error">{error}</div>}
     </form>
-  )
-}
+  );
+};
 
-export default OrderForm
+export default OrderForm;
