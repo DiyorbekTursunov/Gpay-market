@@ -30,8 +30,8 @@ const ProfilePage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Get currentStep from Redux store
-//   const currentStep = useSelector(selectCurrentStep);
-    const currentStep = 3
+  //   const currentStep = useSelector(selectCurrentStep);
+  const currentStep = 5;
 
   console.log(currentStep);
 
@@ -177,20 +177,16 @@ const ProfilePage: React.FC = () => {
         );
       case 3:
         return (
-          <ThirdProfileRight
-            gameSession={gameSession}
-            isLoading={loading}
-          />
+          <ThirdProfileRight gameSession={gameSession} isLoading={loading} />
         );
       case 4:
         return (
-          <FourthProfileRight
-            gameSession={gameSession}
-            isLoading={loading}
-          />
+          <FourthProfileRight gameSession={gameSession} isLoading={loading} />
         );
       case 5:
-        return <FifthProfileRight {...commonProps} />;
+        return (
+          <FifthProfileRight gameSession={gameSession} isLoading={loading} />
+        );
       default:
         return null;
     }

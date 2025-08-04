@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { checkOrderCode } from "../../../store/slices/gameSessionSlice"; // Adjust import path
@@ -32,32 +32,79 @@ const ThirdProfileRight: React.FC<ProfileRightProps> = ({
     (state: RootState) => state.gameSession.sellerId
   );
 
-  // Polling effect: Check status every 3 seconds until statusId is 6 or an error occurs
-//   useEffect(() => {
-//     if (gameSession && gameSession.statusId !== 18 && !error) {
-//       const intervalId = setInterval(() => {
-//         if (gameSession.uniqueCode) {
-//           dispatch(
-//             checkOrderCode({ uniqueCode: gameSession.uniqueCode, sellerId })
-//           );
-//         }
-//       }, 3000); // Poll every 3 seconds
+  const [timeLeft, setTimeLeft] = useState<string>("");
 
-//       // Cleanup interval on unmount or when conditions change
-//       return () => clearInterval(intervalId);
-//     }
-//   }, [gameSession, dispatch, sellerId, error]);
+  // Countdown timer logic - counts elapsed time from addedDateTime
+  useEffect(() => {
+    // Check if addedDateTime exists
+    if (!gameSession.addedDateTime) {
+      setTimeLeft("N/A");
+      return;
+    }
 
-  // Step-setting effect: Set step when statusId reaches 6
-//   useEffect(() => {
-//     if (gameSession?.statusId === 6) {
-//         if (gameSession?.queuePosition > 0) {
-//         dispatch(setStep(4));
-//       } else if (gameSession?.queuePosition <= 0) {
-//         dispatch(setStep(5));
-//       }
-//     }
-//   }, [gameSession, dispatch]);
+    const startTime = new Date(gameSession.addedDateTime).getTime();
+    // Check if addedDateTime is valid
+    if (isNaN(startTime)) {
+      setTimeLeft("N/A");
+      return;
+    }
+
+    // Set up the timer to update every second
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const elapsed = now - startTime; // Calculate elapsed time instead of remaining time
+
+      if (elapsed < 0) {
+        // If somehow the added time is in the future, show 00:00:00
+        setTimeLeft("00:00:00");
+      } else {
+        // Calculate hours, minutes, seconds from elapsed time
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        // Format as "00:00:00"
+        const formattedTime = [
+          String(hours).padStart(2, "0"),
+          String(minutes).padStart(2, "0"),
+          String(seconds).padStart(2, "0"),
+        ].join(":");
+
+        setTimeLeft(formattedTime);
+      }
+    }, 1000); // Updates every 1000ms (1 second)
+
+    // Cleanup the interval when component unmounts or addedDateTime changes
+    return () => clearInterval(timer);
+  }, [gameSession.addedDateTime]);
+
+  //   Polling effect: Check status every 3 seconds until statusId is 6 or an error occurs
+  useEffect(() => {
+    if (gameSession && gameSession.statusId !== 18 && !error) {
+      const intervalId = setInterval(() => {
+        if (gameSession.uniqueCode) {
+          dispatch(
+            checkOrderCode({ uniqueCode: gameSession.uniqueCode, sellerId })
+          );
+        }
+      }, 3000); // Poll every 3 seconds
+
+      // Cleanup interval on unmount or when conditions change
+      return () => clearInterval(intervalId);
+    }
+  }, [gameSession, dispatch, sellerId, error]);
+
+  //   Step-setting effect: Set step when statusId reaches 6
+  useEffect(() => {
+    if (gameSession?.statusId === 18) {
+      if (gameSession?.queuePosition > 0) {
+        dispatch(setStep(4));
+      } else if (gameSession?.queuePosition <= 0) {
+        dispatch(setStep(5));
+      }
+    }
+  }, [gameSession, dispatch]);
 
   // Navigation effect: Redirect to error page if an error is detected
   useEffect(() => {
@@ -111,7 +158,7 @@ const ThirdProfileRight: React.FC<ProfileRightProps> = ({
           <div className="profile__left__row__info">
             <span className="profile__left__row__info__text">
               {t("profileLeft.activationTimeLabel", {
-                time: gameSession?.addedDateTime || "N/A",
+                time: timeLeft,
               })}
             </span>
             <svg

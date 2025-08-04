@@ -7,11 +7,13 @@ import SecondProfileLeft from "../../components/SecoundProfileLeft/SecondProfile
 import SixthProfileRight from "../../components/ProfileRightPages/SixthProfileRight/SixthProfileRight";
 import { Link } from "react-router-dom";
 import SendReviewProfileRight from "../../components/ProfileRightPages/SendReviewProfileRight/SendReviewProfileRight";
+import { GameSessionInfo } from "../../types";
 
 const LastProfilePage: React.FC = () => {
   const images = [profilePageBackground1, profilePageBackground2];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showReviewForm, setShowReviewForm] = useState(false); // New state
+    const [gameSession, setGameSession] = useState<GameSessionInfo | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -56,10 +58,6 @@ const LastProfilePage: React.FC = () => {
         <div className="last-profile__container">
           <SecondProfileLeft
             imgSrc={images[currentImageIndex]}
-            title="Command & Conquer™ Red Alert™ 3- Uprising"
-            orderId="99999999"
-            dlcLabel="DLC"
-            activationTime="00:00:00"
           />
 
           {showReviewForm ? (

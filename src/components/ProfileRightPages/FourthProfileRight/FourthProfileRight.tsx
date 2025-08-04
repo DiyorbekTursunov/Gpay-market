@@ -28,7 +28,7 @@ const FourthProfileRight: React.FC<ProfileLeftProps> = ({
     (state: RootState) => state.gameSession.sellerId
   );
 
-  // Polling effect: Check status every 3 seconds until statusId is 6 or an error occurs
+// Polling effect: Check status every 3 seconds until statusId is 6 or an error occurs
 //   useEffect(() => {
 //     if (gameSession && gameSession.statusId !== 18 && !error) {
 //       const intervalId = setInterval(() => {
