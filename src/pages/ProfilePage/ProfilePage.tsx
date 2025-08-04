@@ -31,7 +31,7 @@ const ProfilePage: React.FC = () => {
 
   // Get currentStep from Redux store
 //   const currentStep = useSelector(selectCurrentStep);
-    const currentStep = 4
+    const currentStep = 3
 
   console.log(currentStep);
 

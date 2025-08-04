@@ -10,6 +10,7 @@ import type { GameSessionInfo } from "../../../service/api/api";
 import type { RootState } from "../../../store";
 import { setError, clearError } from "../../../store/slices/errorSlice";
 import "./SecoundProfileRight.scss";
+import { useEffect, useState } from "react";
 
 interface SecoundProfileRightProps {
   gameSession: GameSessionInfo;
@@ -27,6 +28,53 @@ const SecoundProfileRight: React.FC<SecoundProfileRightProps> = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const error = useSelector((state: RootState) => state.error.message);
+
+  const [timeLeft, setTimeLeft] = useState<string>("");
+
+  // Countdown timer logic - counts elapsed time from addedDateTime
+  useEffect(() => {
+    // Check if addedDateTime exists
+    if (!gameSession.addedDateTime) {
+      setTimeLeft("N/A");
+      return;
+    }
+
+    const startTime = new Date(gameSession.addedDateTime).getTime();
+    // Check if addedDateTime is valid
+    if (isNaN(startTime)) {
+      setTimeLeft("N/A");
+      return;
+    }
+
+    // Set up the timer to update every second
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const elapsed = now - startTime; // Calculate elapsed time instead of remaining time
+
+      if (elapsed < 0) {
+        // If somehow the added time is in the future, show 00:00:00
+        setTimeLeft("00:00:00");
+      } else {
+        // Calculate hours, minutes, seconds from elapsed time
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        // Format as "00:00:00"
+        const formattedTime = [
+          String(hours).padStart(2, "0"),
+          String(minutes).padStart(2, "0"),
+          String(seconds).padStart(2, "0"),
+        ].join(":");
+
+        setTimeLeft(formattedTime);
+      }
+    }, 1000); // Updates every 1000ms (1 second)
+
+    // Cleanup the interval when component unmounts or addedDateTime changes
+    return () => clearInterval(timer);
+  }, [gameSession.addedDateTime]);
 
   const handleConfirmAccount = async () => {
     dispatch(clearError());
@@ -105,9 +153,9 @@ const SecoundProfileRight: React.FC<SecoundProfileRightProps> = ({
           )}
           <div className="profile__left__row__info">
             <span className="profile__left__row__info__text">
-              {gameSession.cantSwitchAccountTimer
-                ? `${gameSession.cantSwitchAccountTimer}s`
-                : "Ready"}
+              {t("profileLeft.activationTimeLabel", {
+                time: timeLeft,
+              })}
             </span>
             <svg
               width="16"
@@ -181,7 +229,6 @@ const SecoundProfileRight: React.FC<SecoundProfileRightProps> = ({
         </div>
 
         <SecoundProfileForm
-          onSubmit={handleFormSubmit}
           isLoading={isLoading}
           error={error}
           onConfirmAccount={handleConfirmAccount}

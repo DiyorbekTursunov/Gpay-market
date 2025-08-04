@@ -29,20 +29,20 @@ const FourthProfileRight: React.FC<ProfileLeftProps> = ({
   );
 
   // Polling effect: Check status every 3 seconds until statusId is 6 or an error occurs
-  useEffect(() => {
-    if (gameSession && gameSession.statusId !== 18 && !error) {
-      const intervalId = setInterval(() => {
-        if (gameSession.uniqueCode) {
-          dispatch(
-            checkOrderCode({ uniqueCode: gameSession.uniqueCode, sellerId })
-          );
-        }
-      }, 3000); // Poll every 3 seconds
+//   useEffect(() => {
+//     if (gameSession && gameSession.statusId !== 18 && !error) {
+//       const intervalId = setInterval(() => {
+//         if (gameSession.uniqueCode) {
+//           dispatch(
+//             // checkOrderCode({ uniqueCode: gameSession.uniqueCode, sellerId })
+//           );
+//         }
+//       }, 3000); // Poll every 3 seconds
 
-      // Cleanup interval on unmount or when conditions change
-      return () => clearInterval(intervalId);
-    }
-  }, [gameSession, dispatch, sellerId, error]);
+//       // Cleanup interval on unmount or when conditions change
+//       return () => clearInterval(intervalId);
+//     }
+//   }, [gameSession, dispatch, sellerId, error]);
 
   // Step-setting effect: Set step when statusId reaches 6
   //   useEffect(() => {

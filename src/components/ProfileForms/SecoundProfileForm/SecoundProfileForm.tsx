@@ -17,14 +17,12 @@ interface SecoundProfileFormProps extends OrderFormProps {
 const SecoundProfileForm: React.FC<SecoundProfileFormProps> = ({
   isLoading,
   error,
-  onConfirmAccount,
 }) => {
   const { t } = useTranslation();
   const { id } = useParams();
-  const [localError, setLocalError] = useState<string>("");
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const [timeLeft, setTimeLeft] = useState<number>(119);
+
   useEffect(() => {
     if (timeLeft > 0) {
       const timer = setInterval(() => {
@@ -35,6 +33,7 @@ const SecoundProfileForm: React.FC<SecoundProfileFormProps> = ({
   }, [timeLeft]);
 
   const handleConfirmAccount = async () => {
+    console.log("Confirming account...");
     dispatch(nextStep());
   };
 
@@ -46,9 +45,6 @@ const SecoundProfileForm: React.FC<SecoundProfileFormProps> = ({
 
   return (
     <form className="secound-order-form">
-      {localError && (
-        <div className="secound-order-form__error">{localError}</div>
-      )}
       <Button
         text={
           t("Это мой аккаунт") +
