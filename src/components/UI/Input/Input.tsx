@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import './Input.scss';
+import { useState } from "react";
+import "./Input.scss";
 
 export interface InputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel';
+  type?: "text" | "email" | "password" | "number" | "tel";
   disabled?: boolean;
   required?: boolean;
-  error?: boolean;
+  error?: boolean | string; // can be a boolean or an error message string
   label?: string;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   fullWidth?: boolean;
   className?: string;
   id?: string;
@@ -25,14 +25,14 @@ const Input: React.FC<InputProps> = ({
   value,
   onChange,
   placeholder,
-  type = 'text',
+  type = "text",
   disabled = false,
   required = false,
   error,
   label,
-  size = 'medium',
+  size = "medium",
   fullWidth = false,
-  className = '',
+  className = "",
   id,
   name,
   maxLength,
@@ -51,16 +51,18 @@ const Input: React.FC<InputProps> = ({
   };
 
   const inputClasses = [
-    'input',
+    "input",
     `input--${size}`,
-    fullWidth ? 'input--full-width' : '',
-    error ? 'input--error' : '',
-    isFocused ? 'input--focused' : '',
-    disabled ? 'input--disabled' : '',
+    fullWidth ? "input--full-width" : "",
+    error ? "input--error" : "",
+    isFocused ? "input--focused" : "",
+    disabled ? "input--disabled" : "",
     className,
-  ].filter(Boolean).join(' ');
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-  const inputId = id || name || 'input';
+  const inputId = id || name || "input";
 
   return (
     <div className="input-wrapper">

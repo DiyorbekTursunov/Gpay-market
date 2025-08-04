@@ -30,8 +30,8 @@ const ProfilePage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Get currentStep from Redux store
-  const currentStep = useSelector(selectCurrentStep);
-  //   const currentStep = 1
+//   const currentStep = useSelector(selectCurrentStep);
+    const currentStep = 4
 
   console.log(currentStep);
 
@@ -185,9 +185,8 @@ const ProfilePage: React.FC = () => {
       case 4:
         return (
           <FourthProfileRight
-            {...commonProps}
-            queuePosition={gameSession.queuePosition}
-            queueWaitingMinutes={gameSession.queueWaitingMinutes}
+            gameSession={gameSession}
+            isLoading={loading}
           />
         );
       case 5:

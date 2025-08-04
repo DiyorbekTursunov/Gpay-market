@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../UI";
-import type { GameSessionInfo, OrderFormProps } from "../../../types";
+import type { OrderFormProps } from "../../../types";
 import "./SecoundProfileForm.scss";
 import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../../../store";
 import { prevStep, nextStep } from "../../../store/slices/profileFlowSlice";
-import { clearError, setError } from "../../../store/slices/errorSlice";
 import { useParams } from "react-router-dom";
-import { apiService, checkFriendResponse } from "../../../hooks/useApi";
+import { resetSteamAccount } from "../../../store/slices/gameSessionSlice";
 
 interface SecoundProfileFormProps extends OrderFormProps {
   onConfirmAccount?: () => Promise<void>;
@@ -23,8 +23,16 @@ const SecoundProfileForm: React.FC<SecoundProfileFormProps> = ({
   const { id } = useParams();
   const [localError, setLocalError] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const [timeLeft, setTimeLeft] = useState<number>(119);
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timer = setInterval(() => {
+        setTimeLeft((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [timeLeft]);
 
   const handleConfirmAccount = async () => {
     dispatch(nextStep());
@@ -32,6 +40,7 @@ const SecoundProfileForm: React.FC<SecoundProfileFormProps> = ({
 
   const handleChangeAccount = async () => {
     dispatch(prevStep());
+    dispatch(resetSteamAccount(id || ""));
     console.log("Changing account...");
   };
 
@@ -40,13 +49,15 @@ const SecoundProfileForm: React.FC<SecoundProfileFormProps> = ({
       {localError && (
         <div className="secound-order-form__error">{localError}</div>
       )}
-
       <Button
-        text={t("Это мой аккаунт 1 мин 59 с")}
+        text={
+          t("Это мой аккаунт") +
+          ` ${Math.floor(timeLeft / 60)} мин ${timeLeft % 60} с`
+        }
         type="button"
         onClick={handleConfirmAccount}
         isLoading={isLoading}
-        disabled={isLoading}
+        disabled={isLoading || timeLeft === 0}
         fullWidth
         variant="primary"
         size="medium"

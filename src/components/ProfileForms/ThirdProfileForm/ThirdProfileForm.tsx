@@ -1,50 +1,30 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../UI";
-import { OrderFormProps, OrderFormData } from "../../../types";
 import "./ThirdProfileForm.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store/store";
+import { prevStep } from "../../../store/slices/profileFlowSlice";
+import { resetSteamAccount } from "../../../store/slices/gameSessionSlice";
 
-const ThirdProfileForm: React.FC<OrderFormProps> = ({
-  onSubmit,
-  isLoading,
-  error,
-}) => {
+export interface OrderFormProps {
+  isLoading: boolean;
+  error: string | boolean;
+}
+
+const ThirdProfileForm: React.FC<OrderFormProps> = ({ isLoading, error }) => {
+  const { id } = useParams();
   const { t } = useTranslation();
-  const [formData] = useState<OrderFormData>({
-    code: "",
-    isNotRobot: false,
-  });
-  const [localError, setLocalError] = useState<string>("");
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLocalError("");
-
-    // ✔️ Ensure at least 6 numeric digits
-    if (!/^\d{6,}$/.test(formData.code)) {
-      setLocalError(t("profileForm.codeLengthError"));
-      return;
-    }
-
-    onSubmit(formData);
+  const handleChangeAccount = async () => {
+    dispatch(prevStep());
+    dispatch(resetSteamAccount(id || ""));
+    console.log("Changing account...");
   };
 
-  //   const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     // clear local error as soon as user changes input
-  //     if (localError) setLocalError("");
-  //     setFormData((prev) => ({
-  //       ...prev,
-  //       code: e.target.value,
-  //     }));
-  //   };
-
   return (
-    <form className="third-order-form" onSubmit={handleSubmit}>
-      {localError && (
-        <div className="third-order-form__error">{localError}</div>
-      )}
-
+    <form className="third-order-form">
       <Button
         text={t("Сменить аккаунт")}
         type="submit"
@@ -53,6 +33,7 @@ const ThirdProfileForm: React.FC<OrderFormProps> = ({
         fullWidth
         variant="secondary"
         size="medium"
+        onClick={handleChangeAccount}
       />
 
       {error && (
@@ -61,7 +42,9 @@ const ThirdProfileForm: React.FC<OrderFormProps> = ({
         </div>
       )}
 
-      <Link className="third-order-form__link default-hover-active" to={"#"}>Связаться c продавцом</Link>
+      <Link className="third-order-form__link default-hover-active" to={"#"}>
+        Связаться c продавцом
+      </Link>
     </form>
   );
 };

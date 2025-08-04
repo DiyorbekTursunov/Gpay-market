@@ -1,4 +1,3 @@
-import type React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +18,6 @@ import {
 } from "../../store/slices/gameSessionSlice";
 import { getLastOrders, showTelegram } from "../../store/slices/orderSlice";
 import { getErrorMessage } from "../../utils/errorMessages";
-import { setError, clearError } from "../../store/slices/errorSlice";
 import "./OrderPage.scss";
 import { Link } from "react-router-dom";
 
@@ -32,7 +30,6 @@ const OrderPage: React.FC = () => {
   const {
     checkCodeResponse,
     loading,
-    // error,
     needsCaptcha,
     sellerId: currentSellerId,
   } = useAppSelector((state) => state.gameSession);
@@ -87,7 +84,6 @@ const OrderPage: React.FC = () => {
     if (checkCodeResponse && !checkCodeResponse.isCorrectCode) {
       return getErrorMessage(checkCodeResponse.errorCode, t);
     }
-
     return "";
   };
 

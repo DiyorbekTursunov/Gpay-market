@@ -163,7 +163,7 @@ const SecoundProfileRight: React.FC<SecoundProfileRightProps> = ({
             <img
               width={150}
               height={150}
-              src={gameSession.steamProfileAvatarUrl || questionImg}
+              src={gameSession?.steamProfileAvatarUrl || questionImg}
               alt="Steam Profile Avatar"
             />
 
@@ -173,9 +173,9 @@ const SecoundProfileRight: React.FC<SecoundProfileRightProps> = ({
 
             <Link
               className="desctop-second-profile__left__row__text__link"
-              to={gameSession.steamProfileUrl || "#"}
+              to={gameSession?.steamProfileUrl || "#"}
             >
-              {gameSession.steamProfileUrl || "No profile URL"}
+              {gameSession?.steamProfileUrl || ""}
             </Link>
           </div>
         </div>

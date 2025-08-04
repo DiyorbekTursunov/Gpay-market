@@ -1,50 +1,30 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../UI";
-import { OrderFormProps, OrderFormData } from "../../../types";
 import "./FourthProfileForm.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store/store";
+import { prevStep } from "../../../store/slices/profileFlowSlice";
+import { resetSteamAccount } from "../../../store/slices/gameSessionSlice";
 
-const FourthProfileForm: React.FC<OrderFormProps> = ({
-  onSubmit,
-  isLoading,
-  error,
-}) => {
+export interface OrderFormProps {
+  isLoading: boolean;
+  error: string | boolean;
+}
+
+const FourthProfileForm: React.FC<OrderFormProps> = ({ isLoading, error }) => {
+  const { id } = useParams();
   const { t } = useTranslation();
-  const [formData] = useState<OrderFormData>({
-    code: "",
-    isNotRobot: false,
-  });
-  const [localError, setLocalError] = useState<string>("");
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLocalError("");
-
-    // ✔️ Ensure at least 6 numeric digits
-    if (!/^\d{6,}$/.test(formData.code)) {
-      setLocalError(t("profileForm.codeLengthError"));
-      return;
-    }
-
-    onSubmit(formData);
+  const handleChangeAccount = async () => {
+    dispatch(prevStep());
+    dispatch(resetSteamAccount(id || ""));
+    console.log("Changing account...");
   };
 
-  //   const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     // clear local error as soon as user changes input
-  //     if (localError) setLocalError("");
-  //     setFormData((prev) => ({
-  //       ...prev,
-  //       code: e.target.value,
-  //     }));
-  //   };
-
   return (
-    <form className="secound-order-form" onSubmit={handleSubmit}>
-      {localError && (
-        <div className="secound-order-form__error">{localError}</div>
-      )}
-
+    <form className="secound-order-form">
       <Button
         text={t("Сменить аккаунт")}
         type="submit"
@@ -53,6 +33,7 @@ const FourthProfileForm: React.FC<OrderFormProps> = ({
         fullWidth
         variant="secondary"
         size="medium"
+        onClick={handleChangeAccount}
       />
 
       {error && (
@@ -61,7 +42,9 @@ const FourthProfileForm: React.FC<OrderFormProps> = ({
         </div>
       )}
 
-      <Link className="secound-order-form__link" to={"#"}>Связаться c продавцом</Link>
+      <Link className="secound-order-form__link" to={"#"}>
+        Связаться c продавцом
+      </Link>
     </form>
   );
 };

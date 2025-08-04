@@ -1,4 +1,3 @@
-import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Input } from "../UI";
@@ -22,11 +21,9 @@ const OrderForm: React.FC<OrderFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (needsCaptcha && !captchaValid) {
       return;
     }
-
     onSubmit(formData);
   };
 

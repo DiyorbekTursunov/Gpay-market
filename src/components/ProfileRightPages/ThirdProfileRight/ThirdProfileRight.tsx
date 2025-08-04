@@ -1,48 +1,84 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import LanguageSelector from "../../LanguageSelector/LanguageSelector";
-import TelegramLink from "../../TelegramLink/TelegramLink";
-import { GameSessionInfo, OrderFormData } from "../../../types";
-import type { RootState } from "../../../store";
-import "./ThirdProfileRight.scss";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { checkOrderCode } from "../../../store/slices/gameSessionSlice"; // Adjust import path
+import LanguageSelector from "../../LanguageSelector/LanguageSelector"; // Adjust import path
+import TelegramLink from "../../TelegramLink/TelegramLink"; // Adjust import path
+import { GameSessionInfo } from "../../../types"; // Adjust import path
+import type { RootState } from "../../../store"; // Adjust import path
+import "./ThirdProfileRight.scss"; // Adjust import path
 import { Link } from "react-router-dom";
-import posImg from "../../../assets/background/pos.png";
-import ThirdProfileForm from "../../ProfileForms/ThirdProfileForm/ThirdProfileForm";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import questionImg from "../../../assets/background/question.png";
+import ThirdProfileForm from "../../ProfileForms/ThirdProfileForm/ThirdProfileForm"; // Adjust import path
+import questionImg from "../../../assets/background/question.png"; // Adjust import path
+import { setStep } from "../../../store/slices/profileFlowSlice";
+import { AppDispatch } from "../../../store/store";
 
-interface ProfileLeftProps {
+// Define component props
+interface ProfileRightProps {
   gameSession: GameSessionInfo;
   isLoading?: boolean;
 }
 
-const ThirdProfileRight: React.FC<ProfileLeftProps> = ({
+const ThirdProfileRight: React.FC<ProfileRightProps> = ({
   gameSession,
   isLoading = false,
 }) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const error = useSelector((state: RootState) => state.error.message);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const error = useSelector((state: RootState) => state.gameSession.error);
+  const sellerId = useSelector(
+    (state: RootState) => state.gameSession.sellerId
+  );
 
-  const handleFormSubmit = async (formData: OrderFormData) => {};
+  // Polling effect: Check status every 3 seconds until statusId is 6 or an error occurs
+  useEffect(() => {
+    if (gameSession && gameSession.statusId !== 18 && !error) {
+      const intervalId = setInterval(() => {
+        if (gameSession.uniqueCode) {
+          dispatch(
+            checkOrderCode({ uniqueCode: gameSession.uniqueCode, sellerId })
+          );
+        }
+      }, 3000); // Poll every 3 seconds
 
+      // Cleanup interval on unmount or when conditions change
+      return () => clearInterval(intervalId);
+    }
+  }, [gameSession, dispatch, sellerId, error]);
 
-  console.log(gameSession);
+  // Step-setting effect: Set step when statusId reaches 6
+//   useEffect(() => {
+//     if (gameSession?.statusId === 6) {
+//         if (gameSession?.queuePosition > 0) {
+//         dispatch(setStep(4));
+//       } else if (gameSession?.queuePosition <= 0) {
+//         dispatch(setStep(5));
+//       }
+//     }
+//   }, [gameSession, dispatch]);
 
+  // Navigation effect: Redirect to error page if an error is detected
+  useEffect(() => {
+    if (error) {
+      navigate(`/error/${encodeURIComponent(error)}`);
+    }
+  }, [error, navigate]);
 
   return (
     <>
+      {/* Mobile view */}
       <div className="mobile-second-profile__left only_mobile">
         <img
           width={93}
           height={93}
-          src={questionImg}
-          alt="Question Img"
+          src={gameSession?.steamProfileAvatarUrl || questionImg}
+          alt="Profile Avatar"
         />
 
         <div className="second-profile__left__row">
-          {/* DLC badge */}
+          {/* DLC Badge */}
           {gameSession?.isDlc && (
             <div className="profile__left__row__info">
               <span className="profile__left__row__info__text">DLC</span>
@@ -71,7 +107,7 @@ const ThirdProfileRight: React.FC<ProfileLeftProps> = ({
             </div>
           )}
 
-          {/* Activation time badge */}
+          {/* Activation Time Badge */}
           <div className="profile__left__row__info">
             <span className="profile__left__row__info__text">
               {t("profileLeft.activationTimeLabel", {
@@ -117,23 +153,29 @@ const ThirdProfileRight: React.FC<ProfileLeftProps> = ({
           <Link
             className="second-profile__left__row__text__link default-hover-active"
             target="_blank"
-            to={gameSession?.botProfileUrl || "#"}
+            to={gameSession?.steamProfileUrl || "#"}
           >
-            {gameSession?.botProfileUrl}
+            {gameSession?.steamProfileUrl}
           </Link>
           Вам отправлен запрос на добавление друзья в Steam. Вам необходимо
-          принять нашего бота с никнеймом “Bot Name” в друзья. Далее вам
-          отправят купленный товар.
+          принять нашего бота с никнеймом “{gameSession?.botName}” в друзья.
+          Далее вам отправят купленный товар.
         </p>
       </div>
 
+      {/* Desktop view */}
       <div className="secound-profile__right">
         <h1 className="secound-profile__right__title mobile_hidden">
-          {t("Проверка профеля")}
+          {t("Проверка профиля")}
         </h1>
 
         <div className="desctop-second-profile__left">
-          <img width={150} height={150} src={posImg} alt="Question Img" />
+          <img
+            width={150}
+            height={150}
+            src={gameSession?.steamProfileAvatarUrl || questionImg}
+            alt="Profile Avatar"
+          />
 
           <p className="desctop-second-profile__left__row__text only_mobile">
             {t("profileLeft.orderLabel", { id: gameSession?.id })}
@@ -146,22 +188,18 @@ const ThirdProfileRight: React.FC<ProfileLeftProps> = ({
           <p className="desctop-second-profile__left__row__text__2">
             <Link
               className="desctop-second-profile__left__row__text__link default-hover-active"
-              to={"#"}
+              to={gameSession?.steamProfileUrl || "#"}
             >
-              https://steamcommunity.com/profiles/steamid64
+              {gameSession?.steamProfileUrl || ""}
             </Link>
             . <br />
             Вам отправлен запрос на добавление друзья в Steam. Вам необходимо
-            принять нашего бота с никнеймом “Bot Name” в друзья. Далее вам
-            отправят купленный товар.
+            принять нашего бота с никнеймом “{gameSession?.botName}” в друзья.
+            Далее вам отправят купленный товар.
           </p>
         </div>
 
-        <ThirdProfileForm
-          onSubmit={handleFormSubmit}
-          isLoading={isLoading}
-          error={error}
-        />
+        <ThirdProfileForm isLoading={isLoading} error={error} />
 
         <div className="order-page__bottom">
           <LanguageSelector />
