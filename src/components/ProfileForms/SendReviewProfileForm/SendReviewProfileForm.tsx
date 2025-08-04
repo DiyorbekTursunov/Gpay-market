@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../../UI";
 import { OrderFormProps, OrderFormData } from "../../../types";
 import "./SendReviewProfileForm.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Textarea from "../../UI/Textarea/Textarea";
 import ReactionButton from "../../UI/ReactionButton/ReactionButton";
 
@@ -19,10 +19,12 @@ const SendReviewProfileRight: React.FC<OrderFormProps> = ({
   });
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
+    navigate("/");
   };
 
   const handleCodeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

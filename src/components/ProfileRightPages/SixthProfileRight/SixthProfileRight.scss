@@ -156,7 +156,7 @@
 
 // Mobile Adaptive design
 .desctop-second-profile__left {
-//     display: flex;
+    //     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -292,6 +292,15 @@
 
 // Small mobile breakpoint
 @media (max-width: 520px) {
+
+    .desctop-second-profile__left_2 {
+        display: flex;
+    }
+
+
+    .desctop-second-profile__left_2 img {
+        border: none;
+    }
 
     .mobile-second-profile__left {
         display: flex;

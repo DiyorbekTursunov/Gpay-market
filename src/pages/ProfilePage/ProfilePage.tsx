@@ -13,11 +13,9 @@ import { useTranslation } from "react-i18next";
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import SecondProfilePage from "../SecoundProfilePage/SecondProfilePage";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  selectCurrentStep,
-  nextStep,
-} from "../../store/slices/profileFlowSlice";
+import { useDispatch } from "react-redux";
+import { nextStep, selectCurrentStep } from "../../store/slices/profileFlowSlice";
+import { useSelector } from "react-redux";
 
 const ProfilePage: React.FC = () => {
   const { t } = useTranslation();
@@ -30,10 +28,9 @@ const ProfilePage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Get currentStep from Redux store
-  //   const currentStep = useSelector(selectCurrentStep);
-  const currentStep = 5;
+  const currentStep = useSelector(selectCurrentStep);
+  //   const currentStep = 5;
 
-  console.log(currentStep);
 
   const dispatch = useDispatch();
 

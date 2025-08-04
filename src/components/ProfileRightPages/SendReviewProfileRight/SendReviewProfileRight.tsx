@@ -58,11 +58,7 @@ const SendReviewProfileRight: React.FC<ProfileLeftProps> = () => {
           </p>
         </div>
 
-        {/* <p className="send-review-profile__left__row__text__2">
-          В данный момент все боты данной товарной позиции - заняты. <br />
-          Вы можете связаться с продавцом для уточнения возможности ускорения
-          ожидания...
-        </p> */}
+
         <SendReviewProfileForm
           onSubmit={handleFormSubmit}
           isLoading={isLoading}

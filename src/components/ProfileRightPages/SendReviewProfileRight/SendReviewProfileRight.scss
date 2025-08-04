@@ -284,9 +284,9 @@
 // Small mobile breakpoint
 @media (max-width: 520px) {
     .send-review-profile__left {
-        display: none;
+        display: flex;
     }
-
+    
     .mobile-send-review-profile__left {
         display: flex;
 

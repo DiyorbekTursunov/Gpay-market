@@ -5,15 +5,25 @@ import "./LastProfilePage.scss";
 import { useState, useEffect } from "react";
 import SecondProfileLeft from "../../components/SecoundProfileLeft/SecondProfileLeft";
 import SixthProfileRight from "../../components/ProfileRightPages/SixthProfileRight/SixthProfileRight";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SendReviewProfileRight from "../../components/ProfileRightPages/SendReviewProfileRight/SendReviewProfileRight";
 import { GameSessionInfo } from "../../types";
+import { useTranslation } from "react-i18next";
+import { apiService } from "../../service/api/api";
+import { useDispatch } from "react-redux";
+import { nextStep } from "../../store/slices/gameSessionSlice";
 
 const LastProfilePage: React.FC = () => {
+  const { t } = useTranslation();
+  const { id } = useParams<{ id: string }>();
   const images = [profilePageBackground1, profilePageBackground2];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [gameSession, setGameSession] = useState<GameSessionInfo | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const dispatch = useDispatch();
+
   const [showReviewForm, setShowReviewForm] = useState(false); // New state
-    const [gameSession, setGameSession] = useState<GameSessionInfo | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,6 +32,36 @@ const LastProfilePage: React.FC = () => {
 
     return () => clearInterval(interval);
   }, [images.length]);
+
+  // Fetch order details only once when component mounts
+  useEffect(() => {
+    const fetchOrderDetails = async () => {
+      if (!id) return;
+
+      setLoading(true);
+      setError(null);
+
+      try {
+        const result = await apiService.checkCode(id, "12345", "12345");
+
+        if (result && result.isCorrectCode && result.gameSession) {
+          setGameSession(result.gameSession);
+        } else {
+          setError("Invalid order code or session not found");
+        }
+
+        if (result.gameSession.steamProfileUrl) {
+          dispatch(nextStep());
+        }
+      } catch (err: any) {
+        setError(err.message || "Failed to fetch order details");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrderDetails();
+  }, [id]);
 
   return (
     <div className="last-profile-bg">
@@ -56,9 +96,12 @@ const LastProfilePage: React.FC = () => {
         />
 
         <div className="last-profile__container">
-          <SecondProfileLeft
-            imgSrc={images[currentImageIndex]}
-          />
+          {gameSession && (
+            <SecondProfileLeft
+              gameSession={gameSession}
+              imgSrc={images[currentImageIndex]}
+            />
+          )}
 
           {showReviewForm ? (
             <SendReviewProfileRight

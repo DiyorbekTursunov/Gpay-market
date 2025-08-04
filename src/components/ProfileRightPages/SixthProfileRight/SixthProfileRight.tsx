@@ -26,7 +26,7 @@ const SixthProfileRight: React.FC<ProfileLeftProps> = ({
         {t("Удачная покупка")}
       </h1>
 
-      <div className="desctop-second-profile__left">
+      <div className="desctop-second-profile__left_2 desctop-second-profile__left">
         <img src={giftImg} alt="Gift Img" className="mobile_hidden" />
         <img src={giftMobileImg} alt="Gift Img" className="only_mobile" />
 
